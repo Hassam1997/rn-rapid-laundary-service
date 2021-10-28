@@ -9,15 +9,21 @@ import { getData } from '../actions/constant';
 import { validateLogin, update, authUser } from "../actions/authAction";
 import { getservice, getservicebyid } from '../actions/investigationActions';
 import SplashScreen from 'react-native-splash-screen';
+import { color } from '../theme/color';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Back from '../assets/back.svg';
 
 import Login from './Login';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import CurrentLocation from './CurrentLocation';
+import UserAddress from './UserAddress';
+import PickUpLocation from './PickUpLocation';
 import Explore from './Explore';
+import CustomizeOrder from './CustomizeOrder';
 import Services from './Services';
 import SubmitRequest from './SubmitRequest'
 import MyCases from './MyCases'
@@ -48,25 +54,21 @@ const styles = StyleSheet.create({
 const AuthRoute = ({ navigation }) => {
   return (
     <Stack.Navigator
-    initialRouteName='Login'
+      initialRouteName='Login'
       screenOptions={
         screenOptionStyle
       }>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
-    </Stack.Navigator>
-  );
-}
-
-const AuthRouteSignUp = ({ navigation }) => {
-  return (
-    <Stack.Navigator
-      initialRouteName='SignUpNew'
-      screenOptions={
-        screenOptionStyle
-      }>
-      <Stack.Screen name="SignUpNew" component={SignUp} />
+      <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
+      <Stack.Screen name="UserAddress" component={UserAddress} />
+      <Stack.Screen name="PickUpLocation" component={PickUpLocation} />
+      <Stack.Screen name="Explore" component={MyTabs}
+        options={{
+          headerShown: false
+        }} />
+      <Stack.Screen name="CustomizeOrder" component={StackExplore} />
     </Stack.Navigator>
   );
 }
@@ -112,34 +114,23 @@ const StackHome = ({ navigation, props, back, route }) => {
 const StackExplore = ({ navigation, props, route }) => {
   return (
     <ExploreStack.Navigator
-      initialRouteName='MyCases'>
-      <Tab.Screen name="MyCases" component={MyCases}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Tab.Screen name="Services" component={Services}
+      initialRouteName='CustomizeOrderNew'>
+      <Tab.Screen name="CustomizeOrderNew" component={CustomizeOrder}
         options={{
           headerMode: 'float',
           headerTitle: "",
           headerShown: true,
-          headerBackTitleVisible: true,
-          headerBackTitle: "Back",
-          headerTintColor: "black",
-          headerBackTitleStyle: {
-            fontSize: 16,
-            fontFamily: "Poppins-Medium",
-            color: "black",
-          },
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
           headerLeftContainerStyle: {
-            marginTop: 10,
-            left: (Platform.OS === 'ios') ? 18 : 8,
-            alignItems: "center"
+            marginTop: 15,
+            left: 15,
+            alignItems: "center",
           },
           headerStyle: {
-            backgroundColor: '#ECF5FD',
-            height: styles.height,
+            backgroundColor: color.palette.white,
             elevation: 0,
             shadowColor: 'transparent'
           },
@@ -195,8 +186,9 @@ function MyTabs({ props, navigation, route }) {
     <Tab.Navigator
       initialRouteName="ExploreNew"
       screenOptions={{
-        tabBarStyle: { position: 'absolute', overflow: "hidden", borderTopRightRadius: 20, borderTopLeftRadius: 20, height: (Platform.OS === 'ios') ? 80 : 60 },
-        tabBarShowLabel: false
+        tabBarStyle: { height: (Platform.OS === 'ios') ? 80 : 60, backgroundColor: color.primary },
+        tabBarShowLabel: false,
+        lazy: true
       }}>
       <Tab.Screen name="ExploreNew" component={StackHome}
         options={{
@@ -212,6 +204,7 @@ function MyTabs({ props, navigation, route }) {
         }} />
       <Tab.Screen name="MyCasesNew" component={StackExplore}
         options={{
+          tabBarVisible: false,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="library-books" color={color} size={size} />

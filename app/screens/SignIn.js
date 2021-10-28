@@ -39,10 +39,10 @@ function SignIn(props) {
                 />
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => { props.navigation.navigate("SignIn") }}>
+                <TouchableOpacity onPress={() => { props.navigation.navigate("Explore") }}>
                     <Button text={"Login"} />
                 </TouchableOpacity>
-                <Text style={styles.TextStyle}>Create Account: <Text style={styles.SubTextStyle}>Signup</Text>.</Text>
+                <Text style={styles.TextStyle}>Create Account: <Text onPress={() => { props.navigation.navigate("SignUp") }} style={styles.SubTextStyle}>Signup</Text>.</Text>
                 <Text style={styles.TextStyle}>By clicking an account you agree to <Text style={styles.SubTextStyle}>Terms Conditions</Text> and <Text style={styles.SubTextStyle}>Privacy Policy</Text>.</Text>
             </View>
         </ScrollView>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 3,
         alignItems: "center",
         justifyContent: "center",
-        paddingBottom:100
+        paddingBottom: 100
     },
     ButtonContainer: {
         flex: 0.75,
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
         backgroundColor: color.primaryLighter,
         height: 57,
         borderRadius: 10,
-        marginVertical:10
+        marginVertical: 10
     }
 });

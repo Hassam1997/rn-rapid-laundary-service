@@ -9,7 +9,7 @@ import { color } from '../theme/color';
 /**
  * ui imports
  */
-import HomeBg from '../assets/homeBg.svg';
+import Logo from '../assets/logo.svg';
 import Entypo from 'react-native-vector-icons/Entypo';
 /**
  * 
@@ -19,7 +19,7 @@ import Button from '../components/Buttons';
 /**
  * function jsx
  */
-function Explore(props) {
+function UserAddress(props) {
     /**
      * function expression and dynamic stats
      */
@@ -28,37 +28,33 @@ function Explore(props) {
     return (
         <View style={styles.container}>
             <View style={styles.LogoContainer}>
+                <Logo />
             </View>
-            <Text style={styles.HeadingText}>Place A New Order</Text>
+            <Text style={styles.HeadingText}>Woohoo!</Text>
+            <Text style={styles.HeadingText}>Moving Right Along!</Text>
             <View style={styles.TextInputContainer}>
                 <View style={styles.AdrressViewStyle}>
-                    <Entypo name="location-pin" color={color.primary} size={25} />
-                    <Text
-                        numberOfLines={1}
-                        ellipsizeMode='tail'
-                        style={styles.AdrressTextStyle}>255-8 Himrod St, Booklyn NY 11237</Text>
+                    <Entypo name="location-pin" color={color.dim} size={20} />
+                    <Text 
+                    numberOfLines={1}
+                    ellipsizeMode='tail'
+                    style={styles.AdrressTextStyle}>255-8 Himrod St, Booklyn NY 11237</Text>
                 </View>
-                <HomeBg />
+                <TextInput
+                    placeholderTextColor={color.palette.blue}
+                    placeholder="Enter Apt, Floor, Etc. (Optional)"
+                    style={styles.TextInputStyle}
+                />
             </View>
             <View style={styles.ButtonContainer}>
-                <View style={styles.TimeViewStyle}>
-                    <Text
-                        numberOfLines={1}
-                        ellipsizeMode='tail'
-                        style={styles.TimeTextStyle}>Today : 4Pm - 7Pm</Text>
-                </View>
-                <View style={styles.TimeViewStyle}>
-                    <Text onPress={() => {props.navigation.navigate("CustomizeOrder")}}
-                        numberOfLines={1}
-                        ellipsizeMode='tail'
-                        style={styles.TimeTextStyle}>Explore Other Times</Text>
-                </View>
-                <Text style={styles.TextStyle}>When Will My Order Be Ready</Text>
+                <TouchableOpacity onPress={() => { props.navigation.navigate("PickUpLocation") }}>
+                    <Button text={"Continue"} />
+                </TouchableOpacity>
             </View>
         </View>
     )
 };
-export default Explore;
+export default UserAddress;
 /**
  * style sheet
  */
@@ -80,9 +76,9 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     TextInputContainer: {
-        flex: 1.5,
+        flex: 2,
         alignItems: "center",
-        justifyContent: "space-evenly",
+        justifyContent: "flex-start",
     },
     AdrressViewStyle: {
         width: wp("90%"),
@@ -91,43 +87,45 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "flex-start",
-        paddingHorizontal: 20,
-        backgroundColor: color.primaryLighter,
+        paddingHorizontal: 10,
+        backgroundColor: color.palette.lightgray,
         borderRadius: 10
     },
     AdrressTextStyle: {
-        fontSize: 15,
-        color: color.primary,
+        fontSize:12,
+        color: color.dim,
         fontFamily: "Poppins-Regular",
         width: wp("80%"),
     },
-    TimeViewStyle: {
-        width: wp("90%"),
-        height: 57,
-        margin: 10,
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "center",
-        paddingHorizontal: 20,
-        backgroundColor: color.primaryLighter,
-        borderRadius: 10
-    },
-    TimeTextStyle: {
+    TextInputStyle: {
+        width: wp('90%'),
         fontSize: 15,
-        color: color.primary,
         fontFamily: "Poppins-Regular",
-        textAlign:"center"
+        color: color.primary,
+        paddingLeft: 20,
+        backgroundColor: color.primaryLighter,
+        height: 57,
+        borderRadius: 10,
+        marginVertical: 10
     },
     ButtonContainer: {
-        flex: 0.75,
+        flex: 1,
         alignItems: "center",
         justifyContent: "space-evenly"
     },
     TextStyle: {
-        color: "#7A8DA4",
-        fontFamily: "Poppins-Regular",
-        fontSize: 12,
+        color: color.dim,
+        fontFamily: "Poppins-Light",
+        fontSize: 16,
+        width: 280,
+        left: 20,
+        marginVertical: 10
+    },
+    SubTextStyle: {
+        color: color.dim,
         textAlign: "center",
+        fontFamily: "Poppins-Light",
+        fontSize: 14,
         marginVertical: 10
     },
 });
