@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.7",
+    "@react-native-clipboard/clipboard": "^1.8.5",
     "@react-native-community/checkbox": "^0.5.8",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "^2.0.0",
@@ -24,6 +25,8 @@
     "react-moment": "^1.1.1",
     "react-native": "0.66.1",
     "react-native-awesome-alerts": "^1.5.2",
+    "react-native-background-timer": "^2.4.1",
+    "react-native-calendar-picker": "^7.1.2",
     "react-native-check-box": "^2.1.7",
     "react-native-document-picker": "^6.0.4",
     "react-native-dropdown-picker": "^5.1.23",

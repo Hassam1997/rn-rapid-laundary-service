@@ -14,6 +14,7 @@ import { color } from '../theme/color';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Back from '../assets/back.svg';
 
 import Login from './Login';
@@ -24,7 +25,7 @@ import UserAddress from './UserAddress';
 import PickUpLocation from './PickUpLocation';
 import Explore from './Explore';
 import CustomizeOrder from './CustomizeOrder';
-import Services from './Services';
+import ScheduleOrder from './ScheduleOrder';
 import SubmitRequest from './SubmitRequest'
 import MyCases from './MyCases'
 import Profile from './Profile';
@@ -69,6 +70,16 @@ const AuthRoute = ({ navigation }) => {
           headerShown: false
         }} />
       <Stack.Screen name="CustomizeOrder" component={StackExplore} />
+      <Stack.Screen name="ScheduleOrder" component={ScheduleOrder}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitle: "Schedule",
+          headerStyle: {
+            elevation: 0,
+            shadowColor: "white"
+          }
+        }} />
     </Stack.Navigator>
   );
 }
@@ -187,47 +198,99 @@ function MyTabs({ props, navigation, route }) {
       initialRouteName="ExploreNew"
       screenOptions={{
         tabBarStyle: { height: (Platform.OS === 'ios') ? 80 : 60, backgroundColor: color.primary },
-        tabBarShowLabel: false,
         lazy: true
       }}>
       <Tab.Screen name="ExploreNew" component={StackHome}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Foundation name="home" color={color} size={size} />
+            <FontAwesome name="calendar" color={color} size={size} />
           ),
+          tabBarLabel: 'orders',
           tabBarIconStyle: {
             top: 5,
           },
-          tabBarActiveTintColor: '#030171',
-          tabBarInactiveTintColor: 'black',
-        }} />
-      <Tab.Screen name="MyCasesNew" component={StackExplore}
-        options={{
-          tabBarVisible: false,
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="library-books" color={color} size={size} />
-          ),
-          tabBarIconStyle: {
-            top: 5,
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "Nunito-Regular",
+            marginBottom: 10,
           },
-          tabBarActiveTintColor: '#030171',
-          tabBarInactiveTintColor: 'black',
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="ProfileNew" component={StackProfile}
+      <Tab.Screen name="ExploreNew1" component={StackHome}
         options={{
-          headerTitleAlign: 'center',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" color={color} size={size} />
           ),
+          tabBarLabel: 'Account',
           tabBarIconStyle: {
             top: 5,
           },
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: '#030171',
-          tabBarInactiveTintColor: 'black',
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "Nunito-Regular",
+            marginBottom: 10,
+          },
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
+        }} />
+      <Tab.Screen name="ExploreNew2" component={StackHome}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="dollar" color={color} size={size} />
+          ),
+          tabBarIconStyle: {
+            top: 5,
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "Nunito-Regular",
+            marginBottom: 10,
+          },
+          tabBarLabel: 'Pricing',
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
+        }} />
+      <Tab.Screen name="MyCasesNew" component={StackHome}
+        options={{
+          tabBarVisible: false,
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="pricetag" color={color} size={size} />
+          ),
+          tabBarIconStyle: {
+            top: 5,
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "Nunito-Regular",
+            marginBottom: 10,
+          },
+          tabBarLabel: 'Promotion',
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
+        }} />
+      <Tab.Screen name="ProfileNew" component={StackHome}
+        options={{
+          headerTitleAlign: 'center',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="help-circle-outline" color={color} size={size} />
+          ),
+          tabBarIconStyle: {
+            top: 5,
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "Nunito-Regular",
+            marginBottom: 10,
+          },
+          tabBarLabel: 'Help',
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
         }} />
     </Tab.Navigator>
   );

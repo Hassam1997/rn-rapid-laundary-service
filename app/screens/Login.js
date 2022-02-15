@@ -1,8 +1,8 @@
 /**
  * essential imports
  */
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, AppState } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
@@ -15,20 +15,48 @@ import Logo from '../assets/logo.svg';
  * @returns componets
  */
 import Button from '../components/Buttons';
+import Clipboard from '@react-native-clipboard/clipboard';
+import BackgroundTimer from 'react-native-background-timer';
 /**
  * function jsx
  */
 function Login(props) {
+
+    const [isText, setText] = useState('')
+
+
+
+    
+
+    let interval = null;
+    useEffect(() => {
+        const focusListener = props.navigation.addListener('focus', () => {
+            BackgroundTimer.runBackgroundTimer(() => {
+                str()
+            }, 3000);
+        })
+        return () => {
+            focusListener()
+            BackgroundTimer.stopBackgroundTimer();
+        }
+    }, [])
+
+
+    const str = async () => {
+        const text = await Clipboard.getString();
+        setText(text)
+    }
     return (
         <View style={styles.container}>
             <View style={styles.LogoContainer}>
                 <Logo />
             </View>
+            <Text>{isText}</Text>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={()=>{props.navigation.navigate("SignIn")}}>
+                <TouchableOpacity onPress={() => { props.navigation.navigate("SignIn") }}>
                     <Button text={"Login"} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{props.navigation.navigate("SignUp")}}>
+                <TouchableOpacity onPress={() => { props.navigation.navigate("SignUp") }}>
                     <Button text={"Signup"} />
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -66,7 +94,7 @@ const styles = StyleSheet.create({
         color: color.palette.black,
         fontFamily: "Poppins-Regular",
         fontSize: 13,
-        textAlign:"center",
+        textAlign: "center",
         width: 300
     },
     SubTextStyle: {

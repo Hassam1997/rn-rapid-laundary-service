@@ -269,7 +269,7 @@ function CustomizeOrder(props) {
                                         }}
                                     />
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => {props.navigation.navigate("ScheduleOrder")}}>
                                     <Button text={"Schedule Delivery"} />
                                 </TouchableOpacity>
                             </View>
