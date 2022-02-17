@@ -74,6 +74,7 @@ function CustomizeOrder(props) {
                             <Text style={styles.HeadingTextToggle}>Customize Your Order</Text>
                             <Text style={styles.HeadingText}>What Are Our PRICING ?</Text>
                         </View>
+                        <TouchableOpacity onPress={()=>{}}>
                         <View style={styles.AdrressViewStyle}>
                             <CheckBox
                                 tintColors={{
@@ -97,6 +98,8 @@ function CustomizeOrder(props) {
                                 ellipsizeMode='tail'
                                 style={styles.AdrressTextStyle}>Wash & Fold</Text>
                         </View>
+                        </TouchableOpacity>
+
                         <View style={styles.PriceContainer}>
                             <View style={styles.PriceView}>
                                 <View style={styles.PriceTagView}>

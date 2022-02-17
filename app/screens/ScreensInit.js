@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 
-import { StyleSheet, Platform, View, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Platform, View, Button, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -30,6 +30,13 @@ import SubmitRequest from './SubmitRequest'
 import MyCases from './MyCases'
 import Profile from './Profile';
 import EditProfile from './EditProfile'
+import PickUpConfirm from './PickUpConfirm';
+import WashAndFold from './WashAndFold';
+import Account from './Account';
+import Pricing from './Pricing';
+import Promotion from './Promotion';
+import Order from './Order';
+import Plans from './Plans';
 
 const { width } = Dimensions.get('window');
 
@@ -60,7 +67,76 @@ const AuthRoute = ({ navigation }) => {
         screenOptionStyle
       }>
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="PickUp" component={PickUpConfirm}
+        options={{
+          headerMode: 'float',
+          headerTitle: "",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
       <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="Plans" component={Plans} 
+         options={{
+          headerMode: 'float',
+          headerTitle: "Unlock Unlimited" ,
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
+      <Stack.Screen name="Wash" component={WashAndFold} 
+         options={{
+          headerMode: 'float',
+          headerTitle: "",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
       <Stack.Screen name="UserAddress" component={UserAddress} />
@@ -72,13 +148,30 @@ const AuthRoute = ({ navigation }) => {
       <Stack.Screen name="CustomizeOrder" component={StackExplore} />
       <Stack.Screen name="ScheduleOrder" component={ScheduleOrder}
         options={{
-          headerShown: true,
-          headerTitleAlign: "center",
+          headerMode: 'float',
           headerTitle: "Schedule",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerRight: () =>
+            <TouchableOpacity style={{ paddingRight: 15 }}>
+              <Image source={require('../assets/Icon.png')} />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
           headerStyle: {
+            backgroundColor: color.palette.white,
             elevation: 0,
-            shadowColor: "white"
-          }
+            shadowColor: 'transparent'
+          },
         }} />
     </Stack.Navigator>
   );
@@ -218,7 +311,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="ExploreNew1" component={StackHome}
+      <Tab.Screen name="Account" component={Account}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -236,7 +329,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="ExploreNew2" component={StackHome}
+      <Tab.Screen name="Pricing" component={Pricing}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -254,7 +347,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="MyCasesNew" component={StackHome}
+      <Tab.Screen name="Promotion" component={Promotion}
         options={{
           tabBarVisible: false,
           headerShown: false,
@@ -273,7 +366,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="ProfileNew" component={StackHome}
+      <Tab.Screen name="Order" component={Order}
         options={{
           headerTitleAlign: 'center',
           headerShown: false,

@@ -40,7 +40,7 @@ function ScheduleOrder(props) {
         console.log("!", isSelectedEndDate)
     }
 
-    const customDayHeaderStylesCallback = ({ dayOfWeek, month, year }) => {
+    const customDayHeaderStylesCallback = ({ dayOfWeek, month, year,  }) => {
         return {
             textStyle: {
                 color: 'black',
@@ -93,18 +93,50 @@ function ScheduleOrder(props) {
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
-                    height: 12,
+                    height: 32,
                 },
-                shadowOpacity: 0.58,
+                shadowOpacity: 1,
                 shadowRadius: 16.00,
-                elevation: 24,
+                elevation: 30,
                 borderTopLeftRadius: 30,
                 borderTopRightRadius: 30,
                 zIndex: 999
             }}>
-                <View style={styles.TimeViewStyle}>
-                    <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
+                <View>
+                    <View style={styles.TimeViewStyle}>
+                        <View>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 22</Text>
+                            <Text style={{ color: 'white' }}>Today</Text>
+                        </View>
+                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
+
+                    </View>
+
+                    <View style={styles.TimeViewStyle}>
+                        <View>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 23</Text>
+                            <Text style={{ color: 'white' }}>Tomorrow</Text>
+                        </View>
+                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
+                    </View>
+
+                    <View style={styles.TimeViewStyle}>
+                        <View>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 24</Text>
+                            <Text style={{ color: 'white' }}>Sunday</Text>
+                        </View>
+                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
+                    </View>
                 </View>
+
+                <View style={{ height: 120, alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('PickUp')}}>
+                        <View style={{ width: wp('90%'), height: 60, backgroundColor: '#189BCF', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Continue</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         </View>
     )
@@ -154,11 +186,11 @@ const styles = StyleSheet.create({
     },
     TimeViewStyle: {
         width: wp("90%"),
-        height: 57,
+        height: 60,
         marginTop: 10,
         alignItems: "center",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: 'space-between',
         alignSelf: "center",
         paddingHorizontal: 20,
         backgroundColor: color.primary,
