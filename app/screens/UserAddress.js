@@ -1,7 +1,7 @@
 /**
  * essential imports
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -19,11 +19,45 @@ import Button from '../components/Buttons';
 /**
  * function jsx
  */
-function UserAddress(props) {
+
+import CurrentLocation from './CurrentLocation';
+
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+
+
+function UserAddress({ route, navigation }) {
     /**
      * function expression and dynamic stats
      */
     const [isToggle, setToggle] = useState(false)
+    const { otherParam, latitude,longitude } = route.params;
+
+
+    
+    // useEffect(()=>{
+    //     var lat = latitude;
+    //     var lng = longitude;
+
+    //    let ret = await Geocoder.geocodePosition({ lat, lng })
+    //     console.log(ret[0].formattedAddress)
+    // })
+
+    const setLocation = async () => {
+        try {
+            await AsyncStorage.setItem('@address', otherParam);
+
+
+            navigation.navigate("PickUpLocation", { UserAdress: otherParam, latitude:latitude, longitude:longitude })
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return (
         <View style={styles.container}>
@@ -35,10 +69,10 @@ function UserAddress(props) {
             <View style={styles.TextInputContainer}>
                 <View style={styles.AdrressViewStyle}>
                     <Entypo name="location-pin" color={color.dim} size={20} />
-                    <Text 
-                    numberOfLines={1}
-                    ellipsizeMode='tail'
-                    style={styles.AdrressTextStyle}>255-8 Himrod St, Booklyn NY 11237</Text>
+                    <Text
+                        numberOfLines={1}
+                        ellipsizeMode='tail'
+                        style={styles.AdrressTextStyle}>{otherParam}</Text>
                 </View>
                 <TextInput
                     placeholderTextColor={color.palette.blue}
@@ -47,7 +81,7 @@ function UserAddress(props) {
                 />
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => { props.navigation.navigate("PickUpLocation") }}>
+                <TouchableOpacity onPress={() => setLocation()}>
                     <Button text={"Continue"} />
                 </TouchableOpacity>
             </View>
@@ -58,6 +92,7 @@ export default UserAddress;
 /**
  * style sheet
  */
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -92,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     AdrressTextStyle: {
-        fontSize:12,
+        fontSize: 12,
         color: color.dim,
         fontFamily: "Poppins-Regular",
         width: wp("80%"),

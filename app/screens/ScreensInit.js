@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
-import { StyleSheet, Platform, View, Button, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Platform, View, Button, Dimensions, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -37,6 +37,8 @@ import Pricing from './Pricing';
 import Promotion from './Promotion';
 import Order from './Order';
 import Plans from './Plans';
+import Notification from './Notification';
+import Map from './Map';
 
 const { width } = Dimensions.get('window');
 
@@ -59,7 +61,28 @@ const styles = StyleSheet.create({
   height: Platform.OS === 'ios' ? 90 : 50,
 });
 
+
 const AuthRoute = ({ navigation }) => {
+
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [userToken, setUserToken] = useState(null);
+
+  // useEffect (()=>{
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // },[])
+
+  // if(isLoading){
+  //   return(
+  //     <View style={{flex:1 , alignItems:'center', justifyContent:'center'}}>
+  //       <ActivityIndicator size={'large'}/>
+  //     </View>
+  //   )
+  // }
+
+  
+
   return (
     <Stack.Navigator
       initialRouteName='Login'
@@ -67,6 +90,7 @@ const AuthRoute = ({ navigation }) => {
         screenOptionStyle
       }>
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="PickUp" component={PickUpConfirm}
         options={{
           headerMode: 'float',
@@ -91,6 +115,31 @@ const AuthRoute = ({ navigation }) => {
         }}
       />
       <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="Notification" component={Notification} 
+      options={{
+        headerMode: 'float',
+        headerTitle: "Notification",
+        headerTitleAlign: 'center',
+        headerShown: true,
+        headerLeft: () =>
+          <TouchableOpacity onPress={() => { navigation.goBack() }}>
+            <Back />
+          </TouchableOpacity>,
+
+       
+
+        headerLeftContainerStyle: {
+          marginTop: 15,
+          left: 15,
+
+        },
+        headerStyle: {
+          backgroundColor: color.palette.white,
+          elevation: 0,
+          shadowColor: 'transparent'
+        },
+      }}
+      />
       <Stack.Screen name="Plans" component={Plans} 
          options={{
           headerMode: 'float',
@@ -158,7 +207,7 @@ const AuthRoute = ({ navigation }) => {
             </TouchableOpacity>,
 
           headerRight: () =>
-            <TouchableOpacity style={{ paddingRight: 15 }}>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Notification')}} style={{ paddingRight: 15 }}>
               <Image source={require('../assets/Icon.png')} />
             </TouchableOpacity>,
 
