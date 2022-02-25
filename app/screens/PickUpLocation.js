@@ -8,6 +8,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /**
  * ui imports
  */
@@ -24,47 +25,119 @@ import Button from '../components/Buttons';
 
 
 
+
 const postUser = async () => {
 
-    let val = {
-        name: await AsyncStorage.getItem('@firstName'),
-        lastName: await AsyncStorage.getItem('@lastName'),
-        phone: await AsyncStorage.getItem('@phone'),
-        email: await AsyncStorage.getItem('@email'),
-        password: await AsyncStorage.getItem('@password'),
-        address: await AsyncStorage.getItem('@address')
-    }
-
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(val));
-    formData.append('Note', {
-
-
-    });
-
-
-    axios({
-        method: 'POST',
-        url: 'https://custom-demo.net/rapid_laundry_dev/v1/signup',
-        data: {
-            username: val.email,
-            password: val.password,
-            firstname: val.name,
-            lastname: val.lastName,
-            city: 'karachi',
-            country: 'united state',
-            address: val.address,
-            mobile: val.phone,
+    try {
+        let val = {
+            name: await AsyncStorage.getItem('@firstName'),
+            lastName: await AsyncStorage.getItem('@lastName'),
+            phone: await AsyncStorage.getItem('@phone'),
+            email: await AsyncStorage.getItem('@email'),
+            password: await AsyncStorage.getItem('@password'),
+            address: await AsyncStorage.getItem('@address')
         }
-    }).then(function (response) {
-        console.log( response);
-    })
-        .catch(function (error) {
-            console.log(error);
+
+        const formData = new FormData();
+
+
+
+        formData.append('username', val.email)
+        formData.append("password", val.password)
+        formData.append("firstname", val.name)
+        formData.append("lastname", val.lastName)
+        formData.append("city", 'New York')
+        formData.append("country", 'United State')
+        formData.append("address", val.address)
+        formData.append("mobile", val.phone)
+
+        // formData.append('username', 'davidpurpl2@gmail.com')
+        // formData.append("password", 'udsanudsa')
+        // formData.append("firstname", 'david')
+        // formData.append("lastname", 'purple22')
+        // formData.append("city", 'karachi')
+        // formData.append("country", 'united state')
+        // formData.append("address", 'street 72 pinkavenue')
+        // formData.append("mobile", '021 231 2314')
+
+        console.log(formData)
+
+
+        fetch('https://custom-demo.net/rapid_laundry_dev/v1/signup', {
+            method: 'post',
+            headers: {
+                Accept: 'multipart/form-data',
+                'Content-Type': 'multipart/form-data',
+            },
+            body: formData
         })
+            .then(response => response.json())
+            .then(async (response) => {
+
+                console.log(response)
+
+
+                await AsyncStorage.setItem('Token', response.accessToken)
+
+
+            })
+
+
+
+
+
+            .catch(err => {
+                console.log(err)
+            })
+
+
+
+        // const headers = {
+        //     Accept: 'multipart/form-data',
+        //     'Content-Type': 'multipart/form-data',
+        // }
+        // axios({
+        //     method: "post",
+        //     url: "https://custom-demo.net/rapid_laundry_dev/v1/signup",
+        //     data: formData,
+        //     headers: {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`},
+        //   })
+        //     .then(function (response) {
+        //       //handle successconsole.log(response);
+        //       console.log(response)
+        //     })
+        //     .catch(function (error) {
+        //       //handle errorconsole.log(response);
+        //       console.log(error)
+        //     });
+        // axios.post(`https://custom-demo.net/rapid_laundry_dev/v1/signup`, formData, {
+        //     headers: headers
+        // }).then(res => {
+        //     console.log(res);
+        // })
+        // const response = await axios({
+        //     method: "post",
+        //     url: "https://custom-demo.net/rapid_laundry_dev/v1/signup",
+        //     data: formData,
+        //     headers: { "Content-Type": 'multipart/form-data'},
+        //   })
+        //     .then(response=> {
+        //       //handle success
+        //       console.log(response);
+        //     })
+        //     .catch(function (response) {
+        //       //handle error
+        //       console.log(response);
+        //     });
+
+    } catch (error) {
+        console.log(error)
+    }
 
 
 }
+
+
 
 
 
@@ -92,7 +165,7 @@ function PickUpLocation({ navigation, route }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={postUser}>
+                <TouchableOpacity onPress={() => postUser()}>
                     <Button text={"Add An Address"} />
                 </TouchableOpacity>
             </View>

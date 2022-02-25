@@ -2,12 +2,26 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Account = () => {
+
+const RemoveData = async () => {
+
+    await AsyncStorage.removeItem('Token')
+
+}
+
+const Account = ({ navigation }) => {
+
+
+
+
+
+
     return (
 
         <ScrollView style={{ flex: 1 }}>
-            <View style={{ height: 80,  justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View style={{ height: 80, justifyContent: 'flex-end', alignItems: 'center' }}>
                 <View style={{ width: wp('90%'), height: 50, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: wp('30%'), alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Account</Text>
@@ -70,12 +84,14 @@ const Account = () => {
                     <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Free Laundry</Text>
                 </View>
 
-                <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
-                    <View>
-                        <Image source={require('../assets/logout.png')} />
+                <TouchableOpacity onPress={() => { RemoveData() }}>
+                    <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
+                        <View>
+                            <Image source={require('../assets/logout.png')} />
+                        </View>
+                        <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Logout</Text>
                     </View>
-                    <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Logout</Text>
-                </View>
+                </TouchableOpacity>
             </View>
 
 

@@ -2,7 +2,7 @@
  * essential imports
  */
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, ColorPropType } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, ColorPropType, Switch } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
@@ -23,9 +23,35 @@ function CustomizeOrder(props) {
     /**
      * function expression and dynamic stats
      */
+
+
     const [isToggle, setToggle] = useState(false)
+    const [isEnabled1, setIsEnabled1] = useState(false);
+    const [isEnabled2, setIsEnabled2] = useState(false);
+    const [isEnabled3, setIsEnabled3] = useState(false);
+    const [isEnabled4, setIsEnabled4] = useState(false);
+
+    // if (setIsEnabled1 == true) {
+    //     isEnabled2 = (false)
+    //     isEnabled3 = (false)
+    //     isEnabled4 = (false)
+    // } else if (setIsEnabled2 == true) {
+    //     isEnabled1 = (false)
+    //     isEnabled3 = (false)
+    //     isEnabled4 = (false)
+    // } else if (setIsEnabled3 == true) {
+    //     isEnabled1 = (false)
+    //     isEnabled2 = (false)
+    //     isEnabled4 = (false)
+    // } else if (setIsEnabled4 == true) {
+    //     isEnabled1 = (false)
+    //     isEnabled3 = (false)
+    //     isEnabled2 = (false)
+    // }
+
 
     return (
+
         <View style={styles.container}>
             {
                 isToggle === false ?
@@ -74,208 +100,223 @@ function CustomizeOrder(props) {
                             <Text style={styles.HeadingTextToggle}>Customize Your Order</Text>
                             <Text style={styles.HeadingText}>What Are Our PRICING ?</Text>
                         </View>
-                        <TouchableOpacity onPress={()=>{}}>
-                        <View style={styles.AdrressViewStyle}>
-                            <CheckBox
-                                tintColors={{
-                                    true: '#62D587',
-                                    false: "#1B1852"
-                                }}
-                                style={{
-                                    height: 18,
-                                    width: 18,
-                                }}
-                                disabled={false}
-                                lineWidth={1}
-                                onCheckColor={'#1B1852'}
-                                onFillColor={'#1B1852'}
-                                onTintColor={'#1B1852'}
-                                value={isToggle}
-                                onValueChange={(newValue) => setToggle(newValue)}
-                            />
-                            <Text
-                                numberOfLines={1}
-                                ellipsizeMode='tail'
-                                style={styles.AdrressTextStyle}>Wash & Fold</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => { }}>
+                            <View style={styles.AdrressViewStyle}>
+                                <CheckBox
+                                    tintColors={{
+                                        true: '#62D587',
+                                        false: "#1B1852"
+                                    }}
+                                    style={{
+                                        height: 18,
+                                        width: 18,
+                                    }}
+                                    disabled={false}
+                                    lineWidth={1}
+                                    onCheckColor={'#1B1852'}
+                                    onFillColor={'#1B1852'}
+                                    onTintColor={'#1B1852'}
+                                    value={isToggle}
+                                    onValueChange={(newValue) => setToggle(newValue)}
+                                />
+                                <Text
+                                    numberOfLines={1}
+                                    ellipsizeMode='tail'
+                                    style={styles.AdrressTextStyle}>Wash & Fold</Text>
+                            </View>
                         </TouchableOpacity>
 
                         <View style={styles.PriceContainer}>
-                            <View style={styles.PriceView}>
-                                <View style={styles.PriceTagView}>
-                                    <View style={{
-                                        flexDirection: "column"
-                                    }}>
-                                        <Text style={{
-                                            fontFamily: "Poppins-Medium",
-                                            fontSize: 14,
-                                            color: color.dim,
-                                        }}>Wash & Fold</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 0-30 Pounds = $45</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 31-40 Pounds = $55</Text>
+                            {
+
+                                <View style={styles.PriceView}>
+                                    <View style={styles.PriceTagView}>
+                                        <View style={{
+                                            flexDirection: "column"
+                                        }}>
+                                            <Text style={{
+                                                fontFamily: "Poppins-Medium",
+                                                fontSize: 14,
+                                                color: color.dim,
+                                            }}>Wash & Fold</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 0-30 Pounds = $45</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 31-40 Pounds = $55</Text>
+                                        </View>
+
+                                        <SwitchToggle
+                                            switchOn={isEnabled1}
+                                            onPress={() => { setIsEnabled1(!isEnabled1) }}
+                                            circleColorOff='white'
+                                            circleColorOn='white'
+                                            backgroundColorOn={color.primary}
+                                            backgroundColorOff='white'
+                                            containerStyle={{
+                                                width: 70,
+                                                height: 37,
+                                                borderRadius: 20,
+                                                borderWidth: 2,
+                                                borderWidthColor: "white",
+                                                backgroundColor: color.palette.white,
+                                                color: color.palette.white
+                                            }}
+                                            circleStyle={{
+                                                width: 35,
+                                                height: 35,
+                                                borderRadius: 20,
+                                                elevation: 2
+                                            }}
+                                        />
+
+
                                     </View>
-                                    <SwitchToggle
-                                        circleColorOff='white'
-                                        circleColorOn='white'
-                                        backgroundColorOn={color.primary}
-                                        backgroundColorOff='white'
-                                        containerStyle={{
-                                            width: 70,
-                                            height: 37,
-                                            borderRadius: 20,
-                                            borderWidth: 2,
-                                            borderWidthColor: "white",
-                                            backgroundColor: color.palette.white,
-                                            color: color.palette.white
-                                        }}
-                                        circleStyle={{
-                                            width: 35,
-                                            height: 35,
-                                            borderRadius: 20,
-                                            elevation: 2
-                                        }}
-                                    />
-                                </View>
-                                <View style={styles.PriceTagView}>
-                                    <View style={{
-                                        flexDirection: "column"
-                                    }}>
-                                        <Text style={{
-                                            fontFamily: "Poppins-Medium",
-                                            fontSize: 14,
-                                            color: color.dim,
-                                        }}>Wash & Fold</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 0-30 Pounds = $45</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 31-40 Pounds = $55</Text>
+                                    <View style={styles.PriceTagView}>
+                                        <View style={{
+                                            flexDirection: "column"
+                                        }}>
+                                            <Text style={{
+                                                fontFamily: "Poppins-Medium",
+                                                fontSize: 14,
+                                                color: color.dim,
+                                            }}>Wash & Fold</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 0-30 Pounds = $45</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 31-40 Pounds = $55</Text>
+                                        </View >
+
+                                        <SwitchToggle
+                                            switchOn={isEnabled2}
+                                            onPress={() => { setIsEnabled2(!isEnabled2) }}
+                                            circleColorOff='white'
+                                            circleColorOn='white'
+                                            backgroundColorOn={color.primary}
+                                            backgroundColorOff='white'
+                                            containerStyle={{
+                                                width: 70,
+                                                height: 37,
+                                                borderRadius: 20,
+                                                borderWidth: 2,
+                                                borderWidthColor: "white",
+                                                backgroundColor: color.palette.white,
+                                                color: color.palette.white
+                                            }}
+                                            circleStyle={{
+                                                width: 35,
+                                                height: 35,
+                                                borderRadius: 20,
+                                                elevation: 2
+                                            }}
+                                        />
+
                                     </View>
-                                    <SwitchToggle
-                                        circleColorOff='white'
-                                        circleColorOn='white'
-                                        backgroundColorOn={color.primary}
-                                        backgroundColorOff='white'
-                                        containerStyle={{
-                                            width: 70,
-                                            height: 37,
-                                            borderRadius: 20,
-                                            borderWidth: 2,
-                                            borderWidthColor: "white",
-                                            backgroundColor: color.palette.white,
-                                            color: color.palette.white
-                                        }}
-                                        circleStyle={{
-                                            width: 35,
-                                            height: 35,
-                                            borderRadius: 20,
-                                            elevation: 2
-                                        }}
-                                    />
-                                </View>
-                                <View style={styles.PriceTagView}>
-                                    <View style={{
-                                        flexDirection: "column"
-                                    }}>
-                                        <Text style={{
-                                            fontFamily: "Poppins-Medium",
-                                            fontSize: 14,
-                                            color: color.dim,
-                                        }}>Wash & Fold</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 0-30 Pounds = $45</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 31-40 Pounds = $55</Text>
+                                    <View style={styles.PriceTagView}>
+                                        <View style={{
+                                            flexDirection: "column"
+                                        }}>
+                                            <Text style={{
+                                                fontFamily: "Poppins-Medium",
+                                                fontSize: 14,
+                                                color: color.dim,
+                                            }}>Wash & Fold</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 0-30 Pounds = $45</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 31-40 Pounds = $55</Text>
+                                        </View>
+                                        <SwitchToggle
+                                            switchOn={isEnabled3}
+                                            onPress={() => { setIsEnabled3(!isEnabled3) }}
+                                            circleColorOff='white'
+                                            circleColorOn='white'
+                                            backgroundColorOn={color.primary}
+                                            backgroundColorOff='white'
+                                            containerStyle={{
+                                                width: 70,
+                                                height: 37,
+                                                borderRadius: 20,
+                                                borderWidth: 2,
+                                                borderWidthColor: "white",
+                                                backgroundColor: color.palette.white,
+                                                color: color.palette.white
+                                            }}
+                                            circleStyle={{
+                                                width: 35,
+                                                height: 35,
+                                                borderRadius: 20,
+                                                elevation: 2
+                                            }}
+                                        />
                                     </View>
-                                    <SwitchToggle
-                                        circleColorOff='white'
-                                        circleColorOn='white'
-                                        backgroundColorOn={color.primary}
-                                        backgroundColorOff='white'
-                                        containerStyle={{
-                                            width: 70,
-                                            height: 37,
-                                            borderRadius: 20,
-                                            borderWidth: 2,
-                                            borderWidthColor: "white",
-                                            backgroundColor: color.palette.white,
-                                            color: color.palette.white
-                                        }}
-                                        circleStyle={{
-                                            width: 35,
-                                            height: 35,
-                                            borderRadius: 20,
-                                            elevation: 2
-                                        }}
-                                    />
-                                </View>
-                                <View style={styles.PriceTagView}>
-                                    <View style={{
-                                        flexDirection: "column"
-                                    }}>
-                                        <Text style={{
-                                            fontFamily: "Poppins-Medium",
-                                            fontSize: 14,
-                                            color: color.dim,
-                                        }}>Wash & Fold</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 0-30 Pounds = $45</Text>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: "Poppins-Regular",
-                                            color: color.palette.lightgray
-                                        }}>- 31-40 Pounds = $55</Text>
+                                    <View style={styles.PriceTagView}>
+                                        <View style={{
+                                            flexDirection: "column"
+                                        }}>
+                                            <Text style={{
+                                                fontFamily: "Poppins-Medium",
+                                                fontSize: 14,
+                                                color: color.dim,
+                                            }}>Wash & Fold</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 0-30 Pounds = $45</Text>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: "Poppins-Regular",
+                                                color: color.palette.lightgray
+                                            }}>- 31-40 Pounds = $55</Text>
+                                        </View>
+                                        <SwitchToggle
+                                            switchOn={isEnabled4}
+                                            onPress={() => { setIsEnabled4(!isEnabled4) }}
+                                            circleColorOff='white'
+                                            circleColorOn='white'
+                                            backgroundColorOn={color.primary}
+                                            backgroundColorOff='white'
+                                            containerStyle={{
+                                                width: 70,
+                                                height: 37,
+                                                borderRadius: 20,
+                                                borderWidth: 2,
+                                                padding: 4,
+                                                borderWidthColor: "white",
+                                                backgroundColor: color.palette.white,
+                                                color: color.palette.white
+                                            }}
+                                            circleStyle={{
+                                                width: 34,
+                                                height: 34,
+                                                borderRadius: 20,
+                                                elevation: 2
+                                            }}
+                                        />
                                     </View>
-                                    <SwitchToggle
-                                        switchOn={true}
-                                        circleColorOff='white'
-                                        circleColorOn='white'
-                                        backgroundColorOn={color.primary}
-                                        backgroundColorOff='white'
-                                        containerStyle={{
-                                            width: 70,
-                                            height: 37,
-                                            borderRadius: 20,
-                                            borderWidth: 2,
-                                            padding: 4,
-                                            borderWidthColor: "white",
-                                            backgroundColor: color.palette.white,
-                                            color: color.palette.white
-                                        }}
-                                        circleStyle={{
-                                            width: 34,
-                                            height: 34,
-                                            borderRadius: 20,
-                                            elevation: 2
-                                        }}
-                                    />
+                                    <TouchableOpacity onPress={() => { props.navigation.navigate("ScheduleOrder") }}>
+                                        <Button text={"Schedule Delivery"} />
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity onPress={() => {props.navigation.navigate("ScheduleOrder")}}>
-                                    <Button text={"Schedule Delivery"} />
-                                </TouchableOpacity>
-                            </View>
+                            }
                             <Text style={[styles.HeadingTextToggle, { paddingTop: 20 }]}>Cancel Order</Text>
                         </View>
                     </>

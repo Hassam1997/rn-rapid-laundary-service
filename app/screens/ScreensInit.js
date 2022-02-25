@@ -39,6 +39,7 @@ import Order from './Order';
 import Plans from './Plans';
 import Notification from './Notification';
 import Map from './Map';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
@@ -80,8 +81,17 @@ const AuthRoute = ({ navigation }) => {
   //     </View>
   //   )
   // }
+  const [isLoggin, setIsLoggin] = useState(false)
 
-  
+  useEffect(async () => {
+    const token = await AsyncStorage.getItem('Token')
+    if (token) {
+      setIsLoggin(true)
+    } else {
+      setIsLoggin(false)
+    }
+
+  }, [])
 
   return (
     <Stack.Navigator
@@ -89,12 +99,42 @@ const AuthRoute = ({ navigation }) => {
       screenOptions={
         screenOptionStyle
       }>
+      {
+        isLoggin == true ? (
+          <>
+            <Stack.Screen name="Explore" component={MyTabs}
+              options={{
+                headerShown: false
+              }} />
+
+
+
+
+          </>
+
+        ) : (
+          <>
+            <Stack.Screen name="beforeHome" component={beforeHome} />
+          </>
+        )
+
+      }
+
+
+    </Stack.Navigator>
+  );
+}
+
+const beforeHome = () => {
+  return (
+    <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Map" component={Map} />
-      <Stack.Screen name="PickUp" component={PickUpConfirm}
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
+      <Stack.Screen name="Map" component={Map} 
         options={{
           headerMode: 'float',
-          headerTitle: "",
+          headerTitle: "Map",
           headerTitleAlign: 'center',
           headerShown: true,
           headerLeft: () =>
@@ -103,79 +143,6 @@ const AuthRoute = ({ navigation }) => {
             </TouchableOpacity>,
 
           headerLeftContainerStyle: {
-            marginTop: 15,
-            left: 15,
-
-          },
-          headerStyle: {
-            backgroundColor: color.palette.white,
-            elevation: 0,
-            shadowColor: 'transparent'
-          },
-        }}
-      />
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="Notification" component={Notification} 
-      options={{
-        headerMode: 'float',
-        headerTitle: "Notification",
-        headerTitleAlign: 'center',
-        headerShown: true,
-        headerLeft: () =>
-          <TouchableOpacity onPress={() => { navigation.goBack() }}>
-            <Back />
-          </TouchableOpacity>,
-
-       
-
-        headerLeftContainerStyle: {
-          marginTop: 15,
-          left: 15,
-
-        },
-        headerStyle: {
-          backgroundColor: color.palette.white,
-          elevation: 0,
-          shadowColor: 'transparent'
-        },
-      }}
-      />
-      <Stack.Screen name="Plans" component={Plans} 
-         options={{
-          headerMode: 'float',
-          headerTitle: "Unlock Unlimited" ,
-          headerTitleAlign: 'center',
-          headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            marginTop: 15,
-            left: 15,
-
-          },
-          headerStyle: {
-            backgroundColor: color.palette.white,
-            elevation: 0,
-            shadowColor: 'transparent'
-          },
-        }}
-      />
-      <Stack.Screen name="Wash" component={WashAndFold} 
-         options={{
-          headerMode: 'float',
-          headerTitle: "",
-          headerTitleAlign: 'center',
-          headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            marginTop: 15,
             left: 15,
 
           },
@@ -187,48 +154,18 @@ const AuthRoute = ({ navigation }) => {
         }}
       />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
-      <Stack.Screen name="UserAddress" component={UserAddress} />
       <Stack.Screen name="PickUpLocation" component={PickUpLocation} />
-      <Stack.Screen name="Explore" component={MyTabs}
-        options={{
-          headerShown: false
-        }} />
-      <Stack.Screen name="CustomizeOrder" component={StackExplore} />
-      <Stack.Screen name="ScheduleOrder" component={ScheduleOrder}
-        options={{
-          headerMode: 'float',
-          headerTitle: "Schedule",
-          headerTitleAlign: 'center',
-          headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerRight: () =>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Notification')}} style={{ paddingRight: 15 }}>
-              <Image source={require('../assets/Icon.png')} />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            marginTop: 15,
-            left: 15,
-
-          },
-          headerStyle: {
-            backgroundColor: color.palette.white,
-            elevation: 0,
-            shadowColor: 'transparent'
-          },
-        }} />
+      <Stack.Screen name="UserAddress" component={UserAddress} />
     </Stack.Navigator>
-  );
+  )
 }
+
+
 
 const StackHome = ({ navigation, props, back, route }) => {
   return (
     <HomeStack.Navigator
+
       initialRouteName='Explore'>
       <Tab.Screen name="Explore" component={Explore}
         options={{
@@ -259,28 +196,21 @@ const StackHome = ({ navigation, props, back, route }) => {
           },
         }}
       />
-
-    </HomeStack.Navigator>
-  );
-}
-
-const StackExplore = ({ navigation, props, route }) => {
-  return (
-    <ExploreStack.Navigator
-      initialRouteName='CustomizeOrderNew'>
-      <Tab.Screen name="CustomizeOrderNew" component={CustomizeOrder}
-        options={{
+      <Tab.Screen name="CustomizeOrder" component={CustomizeOrder}  
+         options={{
           headerMode: 'float',
-          headerTitle: "",
+          headerTitle: "Customize Order",
+          headerTitleAlign: 'center',
           headerShown: true,
           headerLeft: () =>
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
               <Back />
             </TouchableOpacity>,
+
           headerLeftContainerStyle: {
             marginTop: 15,
             left: 15,
-            alignItems: "center",
+
           },
           headerStyle: {
             backgroundColor: color.palette.white,
@@ -289,9 +219,136 @@ const StackExplore = ({ navigation, props, route }) => {
           },
         }}
       />
-    </ExploreStack.Navigator>
+      <Tab.Screen name="ScheduleOrder" component={ScheduleOrder}
+        options={{
+          headerMode: 'float',
+          headerTitle: "Schedule",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerRight: () =>
+            <TouchableOpacity onPress={() => { navigation.navigate('Notification') }} style={{ paddingRight: 15 }}>
+              <Image source={require('../assets/Icon.png')} />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }} />
+
+      <Tab.Screen name='PickUp' component={PickUpConfirm}
+        options={{
+          headerMode: 'float',
+          headerTitle: "Pickup",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
+
+      <Tab.Screen name="Plans" component={Plans}
+        options={{
+          headerMode: 'float',
+          headerTitle: "Unlock Unlimited",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
+      <Tab.Screen name="Wash" component={WashAndFold}
+        options={{
+          headerMode: 'float',
+          headerTitle: "Wash&Fold",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
+      <Tab.Screen name="Notification" component={Notification}
+        options={{
+          headerMode: 'float',
+          headerTitle: "Notification",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
+
+      <Tab.Screen name='Home' component={MyTabs}/>
+
+    </HomeStack.Navigator>
   );
 }
+
 
 const StackProfile = ({ navigation, props, route }) => {
   return (
@@ -307,7 +364,7 @@ const StackProfile = ({ navigation, props, route }) => {
         options={{
           headerMode: 'float',
           headerTitle: "",
-          headerShown: true,
+          headerShown: false,
           headerBackTitleVisible: true,
           headerBackTitle: "Back",
           headerTintColor: "black",
@@ -329,9 +386,15 @@ const StackProfile = ({ navigation, props, route }) => {
           },
         }}
       />
+
+
+
     </ProfileStack.Navigator>
   );
 }
+
+
+
 
 
 function MyTabs({ props, navigation, route }) {
@@ -434,6 +497,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
+
     </Tab.Navigator>
   );
 }

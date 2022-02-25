@@ -78,36 +78,7 @@ function SignUp({props, navigation}) {
     }
 
     
-// const getData = async() => {
-    
-//     try {
-//         let val = {
-//             name: await AsyncStorage.getItem('@firstName'),
-//             lastName : await AsyncStorage.getItem('@lastName'),
-//             phone : await AsyncStorage.getItem('@phone'),
-//             email : await AsyncStorage.getItem('@email'),
-//             password: await AsyncStorage.getItem('@password')
-//         }
-//         console.log(val);
-//     //   const value = async()=>{ 
-          
-//     //     await AsyncStorage.getItem('@firstName');
-//     //     await AsyncStorage.getItem('@lastName');
-//     //     await AsyncStorage.getItem('@phone');
-//     //     await AsyncStorage.getItem('@email');
-//     //     await AsyncStorage.getItem('@password');
-        
-//     }
-    
-//         // console.log(value)
-//             //   if(value !== null) {
-//     //     console.log()
-//     //   }
-//      catch(e) {
-//       // error reading value
-//     }
-//   }
-  
+
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.ScrollContainer}>

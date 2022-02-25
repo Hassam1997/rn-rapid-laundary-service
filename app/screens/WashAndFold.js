@@ -23,7 +23,7 @@ const WashAndFold = ({ navigation }) => {
             </View>
 
             <View style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => { navigation.navigate('ExploreNew') }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Explore') }}>
                     <View style={{ height: 60, backgroundColor: '#189BCF', width: wp('80%'), borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontSize: 20 }}>Continue</Text>
                     </View>
