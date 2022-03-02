@@ -1,11 +1,12 @@
 /**
  * essential imports
  */
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 /**
  * ui imports
  */
@@ -20,10 +21,25 @@ import Button from '../components/Buttons';
  * function jsx
  */
 function Explore(props) {
+    const [isToggle, setToggle] = useState(false)
+    const [place , setPlace] = useState('')
+
+    const locationadd = async () => {
+        
+        const address = await AsyncStorage.getItem('@address')
+
+        setPlace(address)
+        
+        // console.log('hsadjasjda')
+    }
     /**
      * function expression and dynamic stats
      */
-    const [isToggle, setToggle] = useState(false)
+    
+
+    useEffect(()=>{
+        locationadd()
+    })
 
     return (
         <View style={styles.container}>
@@ -34,21 +50,23 @@ function Explore(props) {
                 <View style={styles.AdrressViewStyle}>
                     <Entypo name="location-pin" color={color.primary} size={25} />
                     <Text
-                        numberOfLines={1}
+                        numberOfLines={2}
                         ellipsizeMode='tail'
-                        style={styles.AdrressTextStyle}>255-8 Himrod St, Booklyn NY 11237</Text>
+                        style={styles.AdrressTextStyle}>{place}</Text>
                 </View>
                 <HomeBg />
             </View>
             <View style={styles.ButtonContainer}>
+                <TouchableOpacity >
+                    <View style={styles.TimeViewStyle}>
+                        <Text
+                            numberOfLines={1}
+                            ellipsizeMode='tail'
+                            style={styles.TimeTextStyle}>Today : 4Pm - 7Pm</Text>
+                    </View>
+                </TouchableOpacity>
                 <View style={styles.TimeViewStyle}>
-                    <Text
-                        numberOfLines={1}
-                        ellipsizeMode='tail'
-                        style={styles.TimeTextStyle}>Today : 4Pm - 7Pm</Text>
-                </View>
-                <View style={styles.TimeViewStyle}>
-                    <Text onPress={() => {props.navigation.navigate("CustomizeOrder")}}
+                    <Text onPress={() => { props.navigation.navigate("CustomizeOrder") }}
                         numberOfLines={1}
                         ellipsizeMode='tail'
                         style={styles.TimeTextStyle}>Explore Other Times</Text>
@@ -91,7 +109,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "flex-start",
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         backgroundColor: color.primaryLighter,
         borderRadius: 10
     },
@@ -116,7 +134,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: color.primary,
         fontFamily: "Poppins-Regular",
-        textAlign:"center"
+        textAlign: "center"
     },
     ButtonContainer: {
         flex: 0.75,

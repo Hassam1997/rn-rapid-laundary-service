@@ -13,7 +13,7 @@ const Map = ({ route, navigation }) => {
     console.log(currentlocation);
     return (
         <View style={{ flex: 1 }}>
-            
+
             <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{ flex: 1 }}

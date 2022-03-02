@@ -34,34 +34,34 @@ import { useState } from 'react';
 
 
 
-function SignUp({props, navigation}) {
+function SignUp({ props, navigation }) {
 
     const [FirstName, setFirstName] = useState('');
     const [LastName, setLastName] = useState('');
     const [Phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
-    
 
 
 
-    const setData = async() => {
-        if (FirstName.length== 0) {
+
+    const setData = async () => {
+        if (FirstName.length == 0) {
             Alert.alert('Warning!', 'please enter your first name')
             return;
-        }else if(LastName.length==0){
+        } else if (LastName.length == 0) {
             Alert.alert('Warning!', 'please enter your Last name')
             return;
-        }else if(Phone.length==0){
+        } else if (Phone.length == 0) {
             Alert.alert('Warning!', 'please enter your Phone Number')
             return;
-        }else if(Email.length<10){
+        } else if (Email.length < 10) {
             Alert.alert('Warning!', 'please enter your Email')
-        }else if(Password.length < 6){
+        } else if (Password.length < 6) {
             Alert.alert('Warning!', 'Password must be minimum 7 characters')
         }
-        else{
-            try{
+        else {
+            try {
                 await AsyncStorage.setItem('@firstName', FirstName);
                 await AsyncStorage.setItem('@lastName', LastName);
                 await AsyncStorage.setItem('@phone', Phone);
@@ -69,15 +69,15 @@ function SignUp({props, navigation}) {
                 await AsyncStorage.setItem('@password', Password);
 
                 navigation.navigate('CurrentLocation')
-                
-            }catch(error){
+
+            } catch (error) {
                 console.log(error);
             }
         }
-        
+
     }
 
-    
+
 
 
     return (
@@ -91,7 +91,7 @@ function SignUp({props, navigation}) {
                     <TextInput
                         placeholderTextColor={color.palette.blue}
                         placeholder="First name"
-                        
+
                         style={{
                             width: wp('43%'),
                             fontSize: 15,
@@ -122,7 +122,7 @@ function SignUp({props, navigation}) {
                             marginVertical: 10
                         }}
                     >
-                        
+
                     </TextInput>
                 </View>
 
@@ -150,9 +150,9 @@ function SignUp({props, navigation}) {
 
                 />
             </View>
-            
+
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={()=>setData() }>
+                <TouchableOpacity onPress={() => setData()}>
                     <Button text={"Submit"} />
                 </TouchableOpacity>
                 <Text style={styles.TextStyle}>Already Have Account: <Text onPress={() => { props.navigation.navigate("SignIn") }} style={styles.SubTextStyle}>Login</Text>.</Text>

@@ -40,7 +40,7 @@ function ScheduleOrder(props) {
         console.log("!", isSelectedEndDate)
     }
 
-    const customDayHeaderStylesCallback = ({ dayOfWeek, month, year,  }) => {
+    const customDayHeaderStylesCallback = ({ dayOfWeek, month, year, }) => {
         return {
             textStyle: {
                 color: 'black',
@@ -130,7 +130,7 @@ function ScheduleOrder(props) {
                 </View>
 
                 <View style={{ height: 120, alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={()=>{props.navigation.navigate('PickUp')}}>
+                    <TouchableOpacity onPress={() => { props.navigation.navigate('PickUp') }}>
                         <View style={{ width: wp('90%'), height: 60, backgroundColor: '#189BCF', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Continue</Text>
                         </View>

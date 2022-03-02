@@ -1,11 +1,12 @@
 /**
  * essential imports
  */
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 /**
  * ui imports
  */
@@ -18,7 +19,47 @@ import Button from '../components/Buttons';
 /**
  * function jsx
  */
+
+
+
 function SignIn(props) {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const callApi = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('username', email)
+            formData.append('password', password)
+            formData.append('grantType', 'password')
+           
+
+            fetch('https://custom-demo.net/rapid_laundry_dev/v1/login', {
+                method: 'post',
+                headers: {
+                    Accept: 'multipart/form-data',
+                    'Content-Type': 'multipart/form-data',
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(async (response) => {
+                    console.log(response)
+                    try {
+                        await AsyncStorage.setItem('Token', response.accessToken)
+                    } catch (e) {
+                        console.log('error token', e)
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.ScrollContainer}>
             <View style={styles.LogoContainer}>
@@ -29,17 +70,21 @@ function SignIn(props) {
                     placeholderTextColor={color.palette.blue}
                     placeholder="Email"
                     keyboardType='email-address'
+                    onChangeText={(value) => setEmail(value)}
                     style={styles.TextInputStyle}
+                    value={email}
                 />
                 <TextInput
                     placeholderTextColor={color.palette.blue}
                     placeholder="Password"
                     secureTextEntry={true}
                     style={styles.TextInputStyle}
+                    onChangeText={(value) => setPassword(value)}
+                    value={password}
                 />
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => { props.navigation.navigate("Explore") }}>
+                <TouchableOpacity onPress={() => callApi()}>
                     <Button text={"Login"} />
                 </TouchableOpacity>
                 <Text style={styles.TextStyle}>Create Account: <Text onPress={() => { props.navigation.navigate("SignUp") }} style={styles.SubTextStyle}>Signup</Text>.</Text>

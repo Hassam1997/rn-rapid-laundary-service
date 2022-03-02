@@ -47,8 +47,8 @@ function CurrentLocation({ props, navigation }) {
         // };
 
 
-        let myLocation = Geolocation.getCurrentPosition(data =>{
-           // console.log(data.coords)
+        let myLocation = Geolocation.getCurrentPosition(data => {
+            // console.log(data.coords)
             setLat(data.coords.latitude)
             setLng(data.coords.longitude)
         })
@@ -56,19 +56,19 @@ function CurrentLocation({ props, navigation }) {
         var lat = isLat;
         var lng = isLng;
 
-       let ret = await Geocoder.geocodePosition({ lat, lng })
-    //    navigation.navigate('UserAddress', {otherParam: ret})
+        let ret = await Geocoder.geocodePosition({ lat, lng })
+        //    navigation.navigate('UserAddress', {otherParam: ret})
         //   let ret = await Geocoder.geocodePosition({lat,lng})
         console.log(ret[0].formattedAddress)
 
 
-        ,navigation.navigate('UserAddress', {otherParam: ret[0].formattedAddress, latitude:lat , longitude:lng})
-        
-     
+            , navigation.navigate('UserAddress', { otherParam: ret[0].formattedAddress, latitude: lat, longitude: lng })
+
+
 
     }
 
-   
+
 
 
     /**
@@ -115,7 +115,7 @@ function CurrentLocation({ props, navigation }) {
 
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() =>{location()}}>
+                <TouchableOpacity onPress={() => { location() }}>
                     <Button text={"Continue"} />
                 </TouchableOpacity>
             </View>

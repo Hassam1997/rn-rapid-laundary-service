@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const WashAndFold = ({ navigation }) => {
     return (
-        <View style={{ flex: 1, backgroundColor:'white' }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
 
             <View style={{ height: 30, }}></View>
 

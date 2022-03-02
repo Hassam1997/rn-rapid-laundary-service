@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,14 +7,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RemoveData = async () => {
 
+
     await AsyncStorage.removeItem('Token')
+
 
 }
 
 const Account = ({ navigation }) => {
 
+    const [place, setPlace] = useState('')
+    const [contact, setContact] = useState('')
+    const [email, setEmail] = useState('')
+
+    const locationadd = async () => {
 
 
+        const address = await AsyncStorage.getItem('@address')
+        const contact = await AsyncStorage.getItem('@phone')
+        const email = await AsyncStorage.getItem('@email')
+
+        setPlace(address)
+        setContact(contact)
+        setEmail(email)
+
+        // console.log('hsadjasjda')
+    }
+
+    useEffect(()=>{
+        locationadd()
+    })
 
 
 
@@ -28,9 +49,11 @@ const Account = ({ navigation }) => {
                     </View>
 
                     <View style={{ width: wp('30%'), alignItems: 'flex-end', justifyContent: 'center' }}>
-                        <View style={{ width: 40, height: 40, backgroundColor: '#189BCF', borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Image source={require('../assets/edit.png')} />
-                        </View>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Edit') }}>
+                            <View style={{ width: 40, height: 40, backgroundColor: '#189BCF', borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image source={require('../assets/edit.png')} />
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -42,11 +65,11 @@ const Account = ({ navigation }) => {
             </View>
 
             <View style={{ height: 30, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20 }}>h@gmail.com</Text>
+                <Text style={{ fontSize: 20 }}>{email}</Text>
             </View>
 
             <View style={{ height: 30, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20 }}>(415) 555 - 2671</Text>
+                <Text style={{ fontSize: 20 }}>(415) {contact}</Text>
             </View>
 
             <View style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
@@ -57,10 +80,12 @@ const Account = ({ navigation }) => {
 
             <View style={{ height: 450, alignItems: 'center', justifyContent: 'center', justifyContent: 'space-evenly' }}>
                 <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
-                    <View>
-                        <Image source={require('../assets/location.png')} />
-                    </View>
-                    <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Address</Text>
+                    <TouchableOpacity>
+                        <View>
+                            <Image source={require('../assets/location.png')} />
+                        </View>
+                    </TouchableOpacity>
+                    <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>{place}</Text>
                 </View>
 
                 <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
@@ -84,7 +109,7 @@ const Account = ({ navigation }) => {
                     <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Free Laundry</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => { RemoveData() }}>
+                <TouchableOpacity onPress={() => RemoveData()}>
                     <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
                         <View>
                             <Image source={require('../assets/logout.png')} />

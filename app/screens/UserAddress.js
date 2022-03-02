@@ -33,10 +33,10 @@ function UserAddress({ route, navigation }) {
      * function expression and dynamic stats
      */
     const [isToggle, setToggle] = useState(false)
-    const { otherParam, latitude,longitude } = route.params;
+    const { otherParam, latitude, longitude } = route.params;
 
 
-    
+
     // useEffect(()=>{
     //     var lat = latitude;
     //     var lng = longitude;
@@ -50,7 +50,7 @@ function UserAddress({ route, navigation }) {
             await AsyncStorage.setItem('@address', otherParam);
 
 
-            navigation.navigate("PickUpLocation", { UserAdress: otherParam, latitude:latitude, longitude:longitude })
+            navigation.navigate("PickUpLocation", { UserAdress: otherParam, latitude: latitude, longitude: longitude })
 
         } catch (error) {
             console.log(error);

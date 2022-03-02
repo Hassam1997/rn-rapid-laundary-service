@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { connect } from "react-redux";
 import { getData } from '../actions/constant';
-import { validateLogin, update, authUser } from "../actions/authAction";
+import { validateLogin, update, authUser, login } from "../actions/authAction";
 import { getservice, getservicebyid } from '../actions/investigationActions';
 import SplashScreen from 'react-native-splash-screen';
 import { color } from '../theme/color';
@@ -39,6 +39,7 @@ import Order from './Order';
 import Plans from './Plans';
 import Notification from './Notification';
 import Map from './Map';
+import editScreen from './editScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
@@ -84,6 +85,7 @@ const AuthRoute = ({ navigation }) => {
   const [isLoggin, setIsLoggin] = useState(false)
 
   useEffect(async () => {
+
     const token = await AsyncStorage.getItem('Token')
     if (token) {
       setIsLoggin(true)
@@ -91,38 +93,59 @@ const AuthRoute = ({ navigation }) => {
       setIsLoggin(false)
     }
 
+
+
   }, [])
 
+  // if (isLoggin == true) {
+  //   navigation.navigate('Home')
+  // } else {
+  //   // navigation.navigate('beforeHome')
+  // }
+
+
   return (
+
+
     <Stack.Navigator
       initialRouteName='Login'
       screenOptions={
         screenOptionStyle
       }>
+
       {
         isLoggin == true ? (
-          <>
-            <Stack.Screen name="Explore" component={MyTabs}
-              options={{
-                headerShown: false
-              }} />
 
-
-
-
-          </>
-
+          <Stack.Screen name="Exp" component={MyTabs}
+            options={{
+              headerShown: false
+            }} />
         ) : (
-          <>
-            <Stack.Screen name="beforeHome" component={beforeHome} />
-          </>
-        )
 
+
+
+
+
+
+          <Stack.Screen name="beforeHome" component={beforeHome} />
+        )
       }
+
+      {/* <Stack.Screen name="Exp" component={MyTabs}
+        options={{
+          headerShown: false
+        }} />
+
+      <Stack.Screen name="beforeHome" component={beforeHome} />
+      <Stack.Screen name="StackHome" component={StackHome} /> */}
+
 
 
     </Stack.Navigator>
-  );
+
+
+  )
+
 }
 
 const beforeHome = () => {
@@ -131,7 +154,7 @@ const beforeHome = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
-      <Stack.Screen name="Map" component={Map} 
+      <Stack.Screen name="Map" component={Map}
         options={{
           headerMode: 'float',
           headerTitle: "Map",
@@ -167,6 +190,7 @@ const StackHome = ({ navigation, props, back, route }) => {
     <HomeStack.Navigator
 
       initialRouteName='Explore'>
+      <Tab.Screen name='Home' component={MyTabs} />
       <Tab.Screen name="Explore" component={Explore}
         options={{
           headerShown: false
@@ -196,8 +220,8 @@ const StackHome = ({ navigation, props, back, route }) => {
           },
         }}
       />
-      <Tab.Screen name="CustomizeOrder" component={CustomizeOrder}  
-         options={{
+      <Tab.Screen name="CustomizeOrder" component={CustomizeOrder}
+        options={{
           headerMode: 'float',
           headerTitle: "Customize Order",
           headerTitleAlign: 'center',
@@ -294,6 +318,29 @@ const StackHome = ({ navigation, props, back, route }) => {
           },
         }}
       />
+      <Tab.Screen name="Edit" component={editScreen}
+        options={{
+          headerMode: 'float',
+          headerTitle: "",
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+              <Back />
+            </TouchableOpacity>,
+
+          headerLeftContainerStyle: {
+            marginTop: 15,
+            left: 15,
+
+          },
+          headerStyle: {
+            backgroundColor: color.palette.white,
+            elevation: 0,
+            shadowColor: 'transparent'
+          },
+        }}
+      />
       <Tab.Screen name="Wash" component={WashAndFold}
         options={{
           headerMode: 'float',
@@ -343,7 +390,7 @@ const StackHome = ({ navigation, props, back, route }) => {
         }}
       />
 
-      <Tab.Screen name='Home' component={MyTabs}/>
+
 
     </HomeStack.Navigator>
   );

@@ -8,17 +8,17 @@ const Promotion = () => {
                 <Text style={{ fontWeight: 'bold' }}>Frequently Asked Questions</Text>
             </View>
 
-            <View style={{ height: 70, backgroundColor: 'white', flexDirection:'row', justifyContent:'space-between', padding:20, alignItems:'center'}}>
+            <View style={{ height: 70, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', padding: 20, alignItems: 'center' }}>
                 <View>
-                    <Text style={{fontWeight:'bold', color:'#189BCF'}}>Email</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#189BCF' }}>Email</Text>
                 </View>
 
                 <View >
-                    <Text style={{fontWeight:'bold', color:'#189BCF'}}>Call</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#189BCF' }}>Call</Text>
                 </View>
 
                 <View >
-                    <Text style={{fontWeight:'bold', color:'#189BCF'}}>Chat</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#189BCF' }}>Chat</Text>
                 </View>
             </View>
         </View>

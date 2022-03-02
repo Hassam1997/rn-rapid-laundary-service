@@ -51,15 +51,6 @@ const postUser = async () => {
         formData.append("address", val.address)
         formData.append("mobile", val.phone)
 
-        // formData.append('username', 'davidpurpl2@gmail.com')
-        // formData.append("password", 'udsanudsa')
-        // formData.append("firstname", 'david')
-        // formData.append("lastname", 'purple22')
-        // formData.append("city", 'karachi')
-        // formData.append("country", 'united state')
-        // formData.append("address", 'street 72 pinkavenue')
-        // formData.append("mobile", '021 231 2314')
-
         console.log(formData)
 
 
@@ -76,60 +67,13 @@ const postUser = async () => {
 
                 console.log(response)
 
-
                 await AsyncStorage.setItem('Token', response.accessToken)
+                console.log(response.accessToken)
 
 
-            })
-
-
-
-
-
-            .catch(err => {
+            }).catch(err => {
                 console.log(err)
             })
-
-
-
-        // const headers = {
-        //     Accept: 'multipart/form-data',
-        //     'Content-Type': 'multipart/form-data',
-        // }
-        // axios({
-        //     method: "post",
-        //     url: "https://custom-demo.net/rapid_laundry_dev/v1/signup",
-        //     data: formData,
-        //     headers: {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`},
-        //   })
-        //     .then(function (response) {
-        //       //handle successconsole.log(response);
-        //       console.log(response)
-        //     })
-        //     .catch(function (error) {
-        //       //handle errorconsole.log(response);
-        //       console.log(error)
-        //     });
-        // axios.post(`https://custom-demo.net/rapid_laundry_dev/v1/signup`, formData, {
-        //     headers: headers
-        // }).then(res => {
-        //     console.log(res);
-        // })
-        // const response = await axios({
-        //     method: "post",
-        //     url: "https://custom-demo.net/rapid_laundry_dev/v1/signup",
-        //     data: formData,
-        //     headers: { "Content-Type": 'multipart/form-data'},
-        //   })
-        //     .then(response=> {
-        //       //handle success
-        //       console.log(response);
-        //     })
-        //     .catch(function (response) {
-        //       //handle error
-        //       console.log(response);
-        //     });
-
     } catch (error) {
         console.log(error)
     }

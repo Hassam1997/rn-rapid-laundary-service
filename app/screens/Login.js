@@ -20,63 +20,7 @@ import BackgroundTimer from 'react-native-background-timer';
 /**
  * function jsx
  */
- const postLogin = async () => {
 
-    try {
-        let val = {
-         
-            email: await AsyncStorage.getItem('@email'),
-            password: await AsyncStorage.getItem('@password'),
-           
-        }
-
-        const formData = new FormData();
-
-
-
-        formData.append('username', val.email)
-        formData.append("password", val.password)
-
-        console.log(formData)
-
-        
-        fetch('https://custom-demo.net/rapid_laundry_dev/v1/signup', {
-            method: 'post',
-            headers: {
-                Accept: 'multipart/form-data',
-                'Content-Type': 'multipart/form-data',
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(async (response) => {
-
-            
-
-            try{
-                await AsyncStorage.setItem('Token', response.accessToken)
-                
-            }catch (e){
-                console.log('error hai',e)
-            }
-        })
-
-
-
-           
-        
-            .catch(err => {
-                console.log(err)
-            })
-
-
-
-    } catch (error) {
-        console.log(error)
-    }
-
-
-}
 
 
 

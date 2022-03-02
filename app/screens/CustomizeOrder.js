@@ -31,22 +31,23 @@ function CustomizeOrder(props) {
     const [isEnabled3, setIsEnabled3] = useState(false);
     const [isEnabled4, setIsEnabled4] = useState(false);
 
-    // if (setIsEnabled1 == true) {
-    //     isEnabled2 = (false)
-    //     isEnabled3 = (false)
-    //     isEnabled4 = (false)
-    // } else if (setIsEnabled2 == true) {
-    //     isEnabled1 = (false)
-    //     isEnabled3 = (false)
-    //     isEnabled4 = (false)
-    // } else if (setIsEnabled3 == true) {
-    //     isEnabled1 = (false)
-    //     isEnabled2 = (false)
-    //     isEnabled4 = (false)
-    // } else if (setIsEnabled4 == true) {
-    //     isEnabled1 = (false)
-    //     isEnabled3 = (false)
-    //     isEnabled2 = (false)
+    
+    // if (isEnabled1 == true) {
+    //     setIsEnabled2  (false)
+    //     setIsEnabled3  (false)
+    //     setIsEnabled4 (false)
+    // } else if (isEnabled2 == true) {
+    //     setIsEnabled1 (false)
+    //     setIsEnabled3 (false)
+    //     setIsEnabled4 (false)
+    // } else if (isEnabled3 == true) {
+    //     setIsEnabled1 (false)
+    //     setIsEnabled2 (false)
+    //     setIsEnabled4 (false)
+    // } else if (isEnabled4 == true) {
+    //     setIsEnabled1 (false)
+    //     setIsEnabled3 (false)
+    //     setIsEnabled2 (false)
     // }
 
 
