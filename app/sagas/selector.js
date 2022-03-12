@@ -1,0 +1,1 @@
+export const service = (state) => state.service.comments;

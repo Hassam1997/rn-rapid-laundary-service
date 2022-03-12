@@ -1,7 +1,7 @@
 /**
  * essential imports
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -17,23 +17,10 @@ import Logo from '../assets/logo.svg';
  * @returns componets
  */
 import Button from '../components/Buttons';
-import { useState } from 'react';
+import { storeData } from '../actions/auth/constants';
 /**
  * function jsx
  */
-
-
-// const storeData = async (value) => {
-//     try {
-//         await AsyncStorage.setItem('email', value)
-//     } catch (e) {
-//         // saving error
-//     }
-// }
-
-
-
-
 function SignUp({ props, navigation }) {
 
     const [FirstName, setFirstName] = useState('');
@@ -42,43 +29,36 @@ function SignUp({ props, navigation }) {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
 
-
-
-
     const setData = async () => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (FirstName.length == 0) {
-            Alert.alert('Warning!', 'please enter your first name')
+            Alert.alert('Error!', 'please enter your first name')
             return;
         } else if (LastName.length == 0) {
-            Alert.alert('Warning!', 'please enter your Last name')
+            Alert.alert('Error!', 'please enter your Last name')
             return;
         } else if (Phone.length == 0) {
-            Alert.alert('Warning!', 'please enter your Phone Number')
+            Alert.alert('Error!', 'please enter your Phone Number')
             return;
-        } else if (Email.length < 10) {
-            Alert.alert('Warning!', 'please enter your Email')
-        } else if (Password.length < 6) {
-            Alert.alert('Warning!', 'Password must be minimum 7 characters')
+        } else if (reg.test(Email) === false) {
+            Alert.alert('Error!', 'please enter your Email')
+        } else if (Password.length <= 6) {
+            Alert.alert('Error!', 'Password must be minimum 7 characters')
         }
         else {
             try {
-                await AsyncStorage.setItem('@firstName', FirstName);
-                await AsyncStorage.setItem('@lastName', LastName);
-                await AsyncStorage.setItem('@phone', Phone);
-                await AsyncStorage.setItem('@email', Email);
-                await AsyncStorage.setItem('@password', Password);
-
+                await storeData('@firstName', FirstName);
+                await storeData('@lastName', LastName);
+                await storeData('@phone', Phone);
+                await storeData('@email', Email);
+                await storeData('@password', Password);
                 navigation.navigate('CurrentLocation')
-
             } catch (error) {
                 console.log(error);
             }
         }
 
     }
-
-
-
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.ScrollContainer}>
@@ -91,7 +71,6 @@ function SignUp({ props, navigation }) {
                     <TextInput
                         placeholderTextColor={color.palette.blue}
                         placeholder="First name"
-
                         style={{
                             width: wp('43%'),
                             fontSize: 15,

@@ -7,36 +7,26 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import { useNavigation } from '@react-navigation/native';
 
 import Spinner from "react-native-spinkit"
-import { restAction } from "../actions/constant";
+import { restAction, restActionValue } from "../actions/rest/restAction";
 
 class RestDialogBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
             size: 100,
-            color: "#00007D",
+            color: "#2D97CB",
             isVisible: true,
-            type: "ThreeBounce"
+            type: "Bounce"
         }
     }
-    
-    // componentDidMount() {
-    //     setTimeout( () => {
-    //         this.props.restAction({
-    //             IS_LOADING: false,
-    //         })
-    //         }, 2500)
-    // }
+
     hideAlert = () => {
         this.props.restAction({
             IS_RETURN: false
         })
-        this.props.close;
     };
 
     render() {
-
-        console.log(this.props.rest.IS_LOADING ,"rest", this.props.rest.IS_RETURN, "/", this.props.rest.RETURN,"/",this.props.rest.RETURN_MESSAGE)
         return (
             <>
                 {
@@ -48,13 +38,10 @@ class RestDialogBox extends Component {
                             height: hp("100%"),
                             justifyContent: 'center',
                             alignItems: 'center',
-                            backgroundColor: "#ECF5FD",
-                            alignSelf:"center",
+                            alignSelf: "center",
+                            backgroundColor: 'rgba(52, 52, 52, 0.9)'
                         }}>
-
-                            <Spinner style={{
-                                marginBottom: 100
-                            }} isVisible={this.state.isVisible} size={this.state.size} type={this.state.type} color={this.state.color} />
+                            <Spinner isVisible={this.state.isVisible} size={this.state.size} type={this.state.type} color={this.state.color} />
                         </View>
                         : null
                 }
@@ -96,8 +83,6 @@ class RestDialogBox extends Component {
                                 this.hideAlert();
                             }}
                         />
-
-
                         : null
                 }
             </>
@@ -106,11 +91,13 @@ class RestDialogBox extends Component {
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     rest: state.rest,
 });
 
 const mapDispatchToProps = dispatch => ({
-    restAction: payload => dispatch(restAction(payload))
+    restAction: payload => dispatch(restAction(payload)),
+    restActionValue: payload => dispatch(restAction(payload))
 });
 
 export default connect(

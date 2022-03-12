@@ -34,7 +34,6 @@ function SignIn(props) {
             formData.append('password', password)
             formData.append('grantType', 'password')
            
-
             fetch('https://custom-demo.net/rapid_laundry_dev/v1/login', {
                 method: 'post',
                 headers: {

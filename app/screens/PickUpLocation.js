@@ -1,14 +1,13 @@
 /**
  * essential imports
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 /**
  * ui imports
  */
@@ -19,104 +18,101 @@ import Entypo from 'react-native-vector-icons/Entypo';
  * @returns componets
  */
 import Button from '../components/Buttons';
+import Geocoder from 'react-native-geocoder';
+Geocoder.fallbackToGoogle('AIzaSyBaw7psjNT6a7Zo91LpAgoiTZqYddZUnb4');
+import { connect } from 'react-redux';
+import RestDialogBox from '../components/RestDialogBox';
+import { getsignup } from '../actions/auth/authAction';
+import { getData } from '../actions/auth/constants';
 /**
  * function jsx
  */
-
-
-
-
-const postUser = async () => {
-
-    try {
-        let val = {
-            name: await AsyncStorage.getItem('@firstName'),
-            lastName: await AsyncStorage.getItem('@lastName'),
-            phone: await AsyncStorage.getItem('@phone'),
-            email: await AsyncStorage.getItem('@email'),
-            password: await AsyncStorage.getItem('@password'),
-            address: await AsyncStorage.getItem('@address')
-        }
-
-        const formData = new FormData();
-
-
-
-        formData.append('username', val.email)
-        formData.append("password", val.password)
-        formData.append("firstname", val.name)
-        formData.append("lastname", val.lastName)
-        formData.append("city", 'New York')
-        formData.append("country", 'United State')
-        formData.append("address", val.address)
-        formData.append("mobile", val.phone)
-
-        console.log(formData)
-
-
-        fetch('https://custom-demo.net/rapid_laundry_dev/v1/signup', {
-            method: 'post',
-            headers: {
-                Accept: 'multipart/form-data',
-                'Content-Type': 'multipart/form-data',
-            },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(async (response) => {
-
-                console.log(response)
-
-                await AsyncStorage.setItem('Token', response.accessToken)
-                console.log(response.accessToken)
-
-
-            }).catch(err => {
-                console.log(err)
-            })
-    } catch (error) {
-        console.log(error)
-    }
-
-
-}
-
-
-
-
-
-function PickUpLocation({ navigation, route }) {
+function PickUpLocation(props) {
     /**
      * function expression and dynamic stats
      */
     const [isToggle, setToggle] = useState(false)
-    const { UserAdress, latitude, longitude } = route.params;
+    const [isAddress, setAddress] = useState("")
+    const [isLat, setLat] = useState(props.route.params.latitude ?? "")
+    const [isLng, setLng] = useState(props.route.params.longitude ?? "")
+    const { address } = props.route.params ?? ""
 
+    useEffect(() => {
+        if (props.route.params.address) {
+            setAddress(address)
+        } else {
+            userAddress(isLat, isLng)
+        }
+    }, [address])
+
+    const userAddress = async (lat, lng) => {
+        let res = await Geocoder.geocodePosition({ lat, lng })
+        let add = (res[0].formattedAddress)
+        console.log(add)
+        setAddress(add)
+    }
+
+    const SignUpClick = async () => {
+        const firstName = await getData("@firstName")
+        const lastName = await getData("@lastName");
+        const phone = await getData("@phone");
+        const email = await getData("@email");
+        const password = await getData("@password");
+        let userDetails = {
+            username: email,
+            number: phone,
+            password: password,
+            firstname: firstName,
+            lastname: lastName,
+            address: isAddress
+        }
+        props.getsignup(userDetails)
+    }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.LogoContainer}>
-                <Logo />
-            </View>
-            <Text style={styles.HeadingText}>Woohoo!</Text>
-            <Text style={styles.HeadingText}>Moving Right Along!</Text>
-            <View style={styles.TextInputContainer}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Map', { currentlocation: UserAdress, latitude: latitude, longitude: longitude }) }}>
-                    <View style={styles.TextInputStyle}>
-                        <Image source={require('../assets/location.png')} />
-                        <Text style={{ paddingHorizontal: 10 }}>{UserAdress}</Text>
-                    </View>
-                </TouchableOpacity>
+        <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between" }}>
+            <View>
+                <View style={styles.LogoContainer}>
+                    <Logo />
+                </View>
+                <Text style={styles.HeadingText}>Where are we picking up your order?</Text>
+                <View style={styles.TextInputContainer}>
+                    <TouchableOpacity onPress={() => { props.navigation.navigate('Map') }}>
+                        <View style={styles.TextInputStyle}>
+                            <Image source={require('../assets/location.png')} />
+                            <Text style={{ paddingHorizontal: 10 }}>{isAddress ?? "Add Address"}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TextInput
+                        placeholderTextColor={color.palette.blue}
+                        placeholder="Enter Apt, Floor, Etc. (Optional)"
+                        style={styles.TextInputStyle}
+                    />
+                </View>
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => postUser()}>
-                    <Button text={"Add An Address"} />
+                <TouchableOpacity onPress={() => SignUpClick()}>
+                    <Button text={"Continue"} />
                 </TouchableOpacity>
             </View>
-        </View>
+            <RestDialogBox />
+        </ScrollView>
     )
 };
-export default PickUpLocation;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    // rest: state.rest,
+    // service: state.service.services
+});
+
+const mapDispatchToProps = dispatch => ({
+    getsignup: (payload) => dispatch(getsignup(payload)),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PickUpLocation)
 /**
  * style sheet
  */
@@ -173,9 +169,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     ButtonContainer: {
-        flex: 1,
         alignItems: "center",
-        justifyContent: "space-evenly"
+        justifyContent: "flex-end",
+        paddingBottom: 30
     },
     TextStyle: {
         color: color.dim,

@@ -65,85 +65,20 @@ const styles = StyleSheet.create({
 
 
 const AuthRoute = ({ navigation }) => {
-
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [userToken, setUserToken] = useState(null);
-
-  // useEffect (()=>{
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
-  // },[])
-
-  // if(isLoading){
-  //   return(
-  //     <View style={{flex:1 , alignItems:'center', justifyContent:'center'}}>
-  //       <ActivityIndicator size={'large'}/>
-  //     </View>
-  //   )
-  // }
-  const [isLoggin, setIsLoggin] = useState(false)
-
-  useEffect(async () => {
-
-    const token = await AsyncStorage.getItem('Token')
-    if (token) {
-      setIsLoggin(true)
-    } else {
-      setIsLoggin(false)
-    }
-
-
-
-  }, [])
-
-  // if (isLoggin == true) {
-  //   navigation.navigate('Home')
-  // } else {
-  //   // navigation.navigate('beforeHome')
-  // }
-
-
   return (
-
-
     <Stack.Navigator
       initialRouteName='Login'
       screenOptions={
         screenOptionStyle
       }>
-
-      {
-        isLoggin == true ? (
-
-          <Stack.Screen name="Exp" component={MyTabs}
-            options={{
-              headerShown: false
-            }} />
-        ) : (
-
-
-
-
-
-
-          <Stack.Screen name="beforeHome" component={beforeHome} />
-        )
-      }
-
-      {/* <Stack.Screen name="Exp" component={MyTabs}
-        options={{
-          headerShown: false
-        }} />
-
-      <Stack.Screen name="beforeHome" component={beforeHome} />
-      <Stack.Screen name="StackHome" component={StackHome} /> */}
-
-
-
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
+      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="PickUpLocation" component={PickUpLocation} />
+      <Stack.Screen name="UserAddress" component={UserAddress} />
     </Stack.Navigator>
-
-
   )
 
 }
@@ -154,28 +89,7 @@ const beforeHome = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="CurrentLocation" component={CurrentLocation} />
-      <Stack.Screen name="Map" component={Map}
-        options={{
-          headerMode: 'float',
-          headerTitle: "Map",
-          headerTitleAlign: 'center',
-          headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            left: 15,
-
-          },
-          headerStyle: {
-            backgroundColor: color.palette.white,
-            elevation: 0,
-            shadowColor: 'transparent'
-          },
-        }}
-      />
+      <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="PickUpLocation" component={PickUpLocation} />
       <Stack.Screen name="UserAddress" component={UserAddress} />
@@ -188,7 +102,6 @@ const beforeHome = () => {
 const StackHome = ({ navigation, props, back, route }) => {
   return (
     <HomeStack.Navigator
-
       initialRouteName='Explore'>
       <Tab.Screen name='Home' component={MyTabs} />
       <Tab.Screen name="Explore" component={Explore}
@@ -433,9 +346,6 @@ const StackProfile = ({ navigation, props, route }) => {
           },
         }}
       />
-
-
-
     </ProfileStack.Navigator>
   );
 }
@@ -553,6 +463,9 @@ function MyTabs({ props, navigation, route }) {
 class ScreensInit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      authentication: false
+    }
   }
   getUserAuthennticate = async () => {
     const userAuthenticates = await getData("userAuthenticates");
@@ -561,14 +474,12 @@ class ScreensInit extends Component {
       const authToken = await getData("authToken");
       const id = await getData("id");
       const user = await getData("user");
-      const pic = await getData("pic")
       const authUserInit = {
         userType,
         authToken,
         userAuthenticates: true,
         id,
         user: JSON.parse(user),
-        pic
       }
       this.props.authUser(authUserInit);
     }
@@ -576,10 +487,9 @@ class ScreensInit extends Component {
 
   componentDidMount() {
     this.getUserAuthennticate();
-    this.props.validateLogin();
     setTimeout(() => {
       SplashScreen.hide()
-    }, 3500);
+    }, 2000);
   }
 
 
@@ -587,34 +497,34 @@ class ScreensInit extends Component {
     return (
       <Drawer.Navigator
         initialRouteName="Splash"
-        screenOptions={
-          screenOptionStyle
-        }>
+        screenOptions={{
+          headerShown: false,
+        }}>
         {
-          this.props.auth.userAuthenticates === true ?
+          this.props.auth.userAuthenticates === false ?
+            <Drawer.Screen name="Home" component={AuthRoute}
+              options={{ swipeEnabled: false }} />
+            :
             <Drawer.Screen name="Home" component={MyTabs}
               options={{ swipeEnabled: false, headerShown: false }} />
-            :
-            <Drawer.Screen name="Explore" component={AuthRoute}
-              options={{ swipeEnabled: false }} />
         }
       </Drawer.Navigator>
     );
-
   }
 }
 
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  rest: state.rest,
 });
 
 const mapDispatchToProps = dispatch => ({
   validateLogin: () => dispatch(validateLogin()),
   update: (payload) => dispatch(update(payload)),
   authUser: payload => dispatch(authUser(payload)),
-  getservice: (payload) => dispatch(getservice(payload)),
-  getservicebyid: (payload) => dispatch(getservicebyid(payload)),
+  restAction: payload => dispatch(restAction(payload)),
+  logout: () => dispatch(logout())
 });
 
 export default connect(

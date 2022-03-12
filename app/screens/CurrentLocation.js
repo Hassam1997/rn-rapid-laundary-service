@@ -2,12 +2,10 @@
  * essential imports
  */
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, PermissionsAndroid } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 /**
  * ui imports
  */
@@ -17,76 +15,50 @@ import Logo from '../assets/logo.svg';
  * @returns componets
  */
 import Button from '../components/Buttons';
+import Geolocation from 'react-native-geolocation-service';
 /**
  * function jsx
  */
-import Geolocation from '@react-native-community/geolocation';
-import Geocoder from 'react-native-geocoder';
-import { NavigationContainer } from '@react-navigation/native';
-
-
-
-
-
-Geocoder.fallbackToGoogle('AIzaSyBaw7psjNT6a7Zo91LpAgoiTZqYddZUnb4');
-
-
-
-
-
-function CurrentLocation({ props, navigation }) {
+function CurrentLocation(props) {
 
     const [isLat, setLat] = useState(null)
     const [isLng, setLng] = useState(null)
+    const [isToggle, setToggle] = useState(true)
 
-
-    const location = async () => {
-        // var NY = {
-        //     lat: 40.7809261,
-        //     lng: -73.9637594
-        // };
-
-
-        let myLocation = Geolocation.getCurrentPosition(data => {
-            // console.log(data.coords)
-            setLat(data.coords.latitude)
-            setLng(data.coords.longitude)
-        })
-
-        var lat = isLat;
-        var lng = isLng;
-
-        let ret = await Geocoder.geocodePosition({ lat, lng })
-        //    navigation.navigate('UserAddress', {otherParam: ret})
-        //   let ret = await Geocoder.geocodePosition({lat,lng})
-        console.log(ret[0].formattedAddress)
-
-
-            , navigation.navigate('UserAddress', { otherParam: ret[0].formattedAddress, latitude: lat, longitude: lng })
-
-
-
+    const UserLocation = async (toggle) => {
+        console.log(toggle)
+        setToggle(toggle)
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        )
+        console.log(granted)
+        if (granted != 'denied') {
+            Geolocation.getCurrentPosition(
+                (position) => {
+                    console.log(position);
+                    setLat(position.coords.latitude)
+                    setLng(position.coords.longitude)
+                },
+                (error) => {
+                    console.log(error.code, error.message);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+            );
+        } else {
+            setToggle(true)
+        }
     }
-
-
-
-
-    /**
-     * function expression and dynamic stats
-     */
-    const [isToggle, setToggle] = useState(false)
 
     return (
         <View style={styles.container}>
             <View style={styles.LogoContainer}>
                 <Logo />
             </View>
-
             <Text style={styles.HeadingText}>Welcome to Rapid!</Text>
             <Text style={styles.TextStyle}>Lets check to see if we service in your area.</Text>
             <Text style={styles.SubTextStyle}>Should we use your current location?</Text>
             <View style={styles.TextInputContainer}>
-                <TouchableOpacity onPress={() => setToggle(false)}
+                <TouchableOpacity onPress={(text) => { UserLocation(false) }}
                     style={{
                         width: wp("40%"),
                         height: 57,
@@ -94,11 +66,13 @@ function CurrentLocation({ props, navigation }) {
                         borderRadius: 30,
                         alignItems: "center",
                         justifyContent: "center"
-                    }}><Text style={{
+                    }}>
+                    <Text style={{
                         fontFamily: "Poppins-Regular",
                         fontSize: 15,
                         color: (isToggle === false) ? color.palette.white : color.dim
-                    }}>Yes</Text></TouchableOpacity>
+                    }}>Yes</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => setToggle(true)}
                     style={{
                         width: wp("40%"),
@@ -115,7 +89,7 @@ function CurrentLocation({ props, navigation }) {
 
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => { location() }}>
+                <TouchableOpacity onPress={() => { (isToggle == false) ? props.navigation.navigate("PickUpLocation", {latitude: isLat, longitude: isLng}) : props.navigation.navigate("Map") }}>
                     <Button text={"Continue"} />
                 </TouchableOpacity>
             </View>

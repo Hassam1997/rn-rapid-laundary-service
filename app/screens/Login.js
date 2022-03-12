@@ -35,18 +35,18 @@ function Login(props) {
 
 
 
-    let interval = null;
-    useEffect(() => {
-        const focusListener = props.navigation.addListener('focus', () => {
-            BackgroundTimer.runBackgroundTimer(() => {
-                str()
-            }, 3000);
-        })
-        return () => {
-            focusListener()
-            BackgroundTimer.stopBackgroundTimer();
-        }
-    }, [])
+    // let interval = null;
+    // useEffect(() => {
+    //     const focusListener = props.navigation.addListener('focus', () => {
+    //         BackgroundTimer.runBackgroundTimer(() => {
+    //             str()
+    //         }, 3000);
+    //     })
+    //     return () => {
+    //         focusListener()
+    //         BackgroundTimer.stopBackgroundTimer();
+    //     }
+    // }, [])
 
 
     const str = async () => {

@@ -17,28 +17,22 @@ import Entypo from 'react-native-vector-icons/Entypo';
  * @returns componets
  */
 import Button from '../components/Buttons';
+import { connect } from 'react-redux';
+import RestDialogBox from '../components/RestDialogBox';
+import { callAPI } from "../api";
+import { logout, authUser } from '../actions/auth/authAction';
+import { AUTH, API_CONTS, storeData, getData, removeData } from '../actions/auth/constants';
 /**
  * function jsx
  */
 function Explore(props) {
     const [isToggle, setToggle] = useState(false)
-    const [place , setPlace] = useState('')
-
-    const locationadd = async () => {
-        
-        const address = await AsyncStorage.getItem('@address')
-
-        setPlace(address)
-        
-        // console.log('hsadjasjda')
-    }
+    const [place, setPlace] = useState('')
     /**
      * function expression and dynamic stats
      */
-    
-
-    useEffect(()=>{
-        locationadd()
+    useEffect(() => {
+        console.log(props.auth.user.signup_address)
     })
 
     return (
@@ -52,7 +46,7 @@ function Explore(props) {
                     <Text
                         numberOfLines={2}
                         ellipsizeMode='tail'
-                        style={styles.AdrressTextStyle}>{place}</Text>
+                        style={styles.AdrressTextStyle}>{props.auth.user.signup_address}</Text>
                 </View>
                 <HomeBg />
             </View>
@@ -76,7 +70,15 @@ function Explore(props) {
         </View>
     )
 };
-export default Explore;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    rest: state.rest,
+});
+
+export default connect(
+    mapStateToProps,
+    null
+)(Explore)
 /**
  * style sheet
  */

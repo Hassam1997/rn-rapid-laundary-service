@@ -1,7 +1,7 @@
 /**
  * essential imports
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, ColorPropType } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -24,10 +24,67 @@ function ScheduleOrder(props) {
     /**
      * function expression and dynamic stats
      */
+    //var arr = []
+    var arr2 = []
     const minDate = new Date();
     const [isToggle, setToggle] = useState(false)
     const [isSelectedEndDate, setSelectedEndDate] = useState(null)
     const [isSelectedStartDate, setSelectedStartDate] = useState(null)
+    const [isArray, setArray] = useState([])
+    const [Array, setarray] = useState([...props.route.params.list])
+    //const [price, setPrice] = useState("")
+
+    useEffect(() => {
+        if (props.route.params.list != 'undefined') {
+            // Array.forEach(item => {
+            //     extract(item.pricing_amount, item.pricing_id)
+            // })
+            extract()
+            //  setPrice(props.route.params.list.pricing_amount)
+        }
+
+    }, [])
+
+    const extract = (id, price) => {
+        for (var i = 0; i < Array.length; i++) {
+            let arr = []
+            arr['id'] = Array[i].pricing_amount
+            arr['qty'] = Array[i].quantity
+            arr['price'] = Array[i].pricing_id
+            let a = arr
+            
+            
+            arr2.push(a)
+            setArray(arr2)
+           // console.log(arr2)
+            //break;
+            // for(var j = 0; j < Array.length; j++){
+            //     arr2.push([arr])
+            //     console.log(arr2)
+            // }
+          //  arr2.push([...arr2,arr])
+        }
+        // props.route.params.list.forEach(item => {
+        //     // arr['id'] = id
+        //     // arr['price'] = price
+        //     console.log(item)
+        // })
+
+        // }
+        // console.log(price)
+
+        //  arr['id'] = price
+        // arr.push([price])
+
+        // arr2.push([arr['id'] = id, arr['price'] = price])
+        // setArray(arr)
+
+    }
+
+
+    const uper = () => {
+        console.log("1",isArray)
+    }
 
     const onDateChange = (date, type) => {
 
@@ -48,6 +105,8 @@ function ScheduleOrder(props) {
             }
         };
     }
+
+
 
     return (
         <View style={styles.container}>
@@ -130,7 +189,7 @@ function ScheduleOrder(props) {
                 </View>
 
                 <View style={{ height: 120, alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => { props.navigation.navigate('PickUp') }}>
+                    <TouchableOpacity onPress={() => { /* props.navigation.navigate('PickUp')*/ uper() }}>
                         <View style={{ width: wp('90%'), height: 60, backgroundColor: '#189BCF', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Continue</Text>
                         </View>

@@ -44,10 +44,10 @@ export const color = {
    * Error messages and icons.
    */
   error: palette.red,
-    /**
-   * Successful messages and icons.
-   */
-     error: palette.green,
+  /**
+ * Successful messages and icons.
+ */
+  success: palette.green,
 
   /**
    * Storybook background for Text stories, or any stories where

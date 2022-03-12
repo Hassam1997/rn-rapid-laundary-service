@@ -33,58 +33,50 @@ function UserAddress({ route, navigation }) {
      * function expression and dynamic stats
      */
     const [isToggle, setToggle] = useState(false)
-    const { otherParam, latitude, longitude } = route.params;
 
-
-
-    // useEffect(()=>{
-    //     var lat = latitude;
-    //     var lng = longitude;
-
-    //    let ret = await Geocoder.geocodePosition({ lat, lng })
-    //     console.log(ret[0].formattedAddress)
-    // })
+    useEffect(() => {
+    })
 
     const setLocation = async () => {
         try {
-            await AsyncStorage.setItem('@address', otherParam);
+            //  await AsyncStorage.setItem('@address', otherParam);
 
 
-            navigation.navigate("PickUpLocation", { UserAdress: otherParam, latitude: latitude, longitude: longitude })
+            //   navigation.navigate("PickUpLocation", { UserAdress: otherParam, latitude: latitude, longitude: longitude })
 
         } catch (error) {
             console.log(error);
         }
     }
 
-
-
     return (
         <View style={styles.container}>
-            <View style={styles.LogoContainer}>
-                <Logo />
-            </View>
-            <Text style={styles.HeadingText}>Woohoo!</Text>
-            <Text style={styles.HeadingText}>Moving Right Along!</Text>
-            <View style={styles.TextInputContainer}>
-                <View style={styles.AdrressViewStyle}>
-                    <Entypo name="location-pin" color={color.dim} size={20} />
-                    <Text
-                        numberOfLines={1}
-                        ellipsizeMode='tail'
-                        style={styles.AdrressTextStyle}>{otherParam}</Text>
+            <ScrollView contentContainerStyle={styles.ScrollStyle}>
+                <View style={styles.LogoContainer}>
+                    <Logo />
                 </View>
-                <TextInput
-                    placeholderTextColor={color.palette.blue}
-                    placeholder="Enter Apt, Floor, Etc. (Optional)"
-                    style={styles.TextInputStyle}
-                />
-            </View>
-            <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => setLocation()}>
-                    <Button text={"Continue"} />
-                </TouchableOpacity>
-            </View>
+                <Text style={styles.HeadingText}>Woohoo!</Text>
+                <Text style={styles.HeadingText}>Moving Right Along!</Text>
+                <View style={styles.TextInputContainer}>
+                    <View style={styles.AdrressViewStyle}>
+                        <Entypo name="location-pin" color={color.dim} size={20} />
+                        <Text
+                            numberOfLines={1}
+                            ellipsizeMode='tail'
+                            style={styles.AdrressTextStyle}>kj</Text>
+                    </View>
+                    {/* <TextInput
+                        placeholderTextColor={color.palette.blue}
+                        placeholder="Enter Apt, Floor, Etc. (Optional)"
+                        style={styles.TextInputStyle}
+                    /> */}
+                </View>
+                <View style={styles.ButtonContainer}>
+                    <TouchableOpacity onPress={() => setLocation()}>
+                        <Button text={"Continue"} />
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </View>
     )
 };
@@ -163,4 +155,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginVertical: 10
     },
+    ScrollStyle: {
+        flexGrow: 1
+    }
 });
