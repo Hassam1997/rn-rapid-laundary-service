@@ -102,12 +102,10 @@ export function* signinFunction(action) {
             }));
             data.append("username", action.payload.email)
             data.append("password", action.payload.password)
-            data.append("type", action.payload.type)
             data.append("grantType", action.payload.grantType)
             const postsData = yield callAPI(API_CONTS.SIGNIN, "POST", data).then(res => {
                 if (res.success === true) {
                     const authUserInit = {
-                        userType: res.user.signup_user,
                         authToken: res.accessToken,
                         userAuthenticates: true,
                         id: res.user.signup_id,

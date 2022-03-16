@@ -19,6 +19,9 @@ import Button from '../components/Buttons';
 /**
  * function jsx
  */
+import { connect } from 'react-redux';
+import RestDialogBox from '../components/RestDialogBox';
+import { login } from '../actions/auth/authAction';
 
 
 
@@ -26,38 +29,48 @@ function SignIn(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [grandType, setGrandType] = useState('password')
 
-    const callApi = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('username', email)
-            formData.append('password', password)
-            formData.append('grantType', 'password')
-           
-            fetch('https://custom-demo.net/rapid_laundry_dev/v1/login', {
-                method: 'post',
-                headers: {
-                    Accept: 'multipart/form-data',
-                    'Content-Type': 'multipart/form-data',
-                },
-                body: formData
-            })
-                .then(response => response.json())
-                .then(async (response) => {
-                    console.log(response)
-                    try {
-                        await AsyncStorage.setItem('Token', response.accessToken)
-                    } catch (e) {
-                        console.log('error token', e)
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-
-        } catch (error) {
-            console.log(error)
+    const SignInClick = () => {
+        let userDetails = {
+            email: email,
+            password: password,
+            grantType: grandType
         }
+        props.login(userDetails)
     }
+
+    // const callApi = async () => {
+    //     try {
+    //         const formData = new FormData();
+    //         formData.append('username', email)
+    //         formData.append('password', password)
+    //         formData.append('grantType', 'password')
+
+    //         fetch('https://custom-demo.net/rapid_laundry_dev/v1/login', {
+    //             method: 'post',
+    //             headers: {
+    //                 Accept: 'multipart/form-data',
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //             body: formData
+    //         })
+    //             .then(response => response.json())
+    //             .then(async (response) => {
+    //                 console.log(response)
+    //                 try {
+    //                     await AsyncStorage.setItem('Token', response.accessToken)
+    //                 } catch (e) {
+    //                     console.log('error token', e)
+    //                 }
+    //             }).catch(err => {
+    //                 console.log(err)
+    //             })
+
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.ScrollContainer}>
@@ -83,16 +96,25 @@ function SignIn(props) {
                 />
             </View>
             <View style={styles.ButtonContainer}>
-                <TouchableOpacity onPress={() => callApi()}>
+                <TouchableOpacity onPress={() => SignInClick()}>
                     <Button text={"Login"} />
                 </TouchableOpacity>
                 <Text style={styles.TextStyle}>Create Account: <Text onPress={() => { props.navigation.navigate("SignUp") }} style={styles.SubTextStyle}>Signup</Text>.</Text>
                 <Text style={styles.TextStyle}>By clicking an account you agree to <Text style={styles.SubTextStyle}>Terms Conditions</Text> and <Text style={styles.SubTextStyle}>Privacy Policy</Text>.</Text>
             </View>
+            <RestDialogBox />
         </ScrollView>
     )
 };
-export default SignIn;
+
+const mapDispatchToProps = dispatch => ({
+    login: (payload) => dispatch(login(payload)),
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(SignIn);
 /**
  * style sheet
  */

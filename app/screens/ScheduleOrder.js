@@ -2,7 +2,7 @@
  * essential imports
  */
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, ColorPropType } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Image, ImageBackground, TextInput, ScrollView, ColorPropType, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { color } from '../theme/color';
@@ -10,8 +10,15 @@ import { color } from '../theme/color';
  * ui imports
  */
 import CheckBox from '@react-native-community/checkbox';
+import { connect } from 'react-redux';
 import SwitchToggle from "react-native-switch-toggle";
 import CalendarPicker from 'react-native-calendar-picker';
+import Moment from 'react-moment';
+import RestDialogBox from '../components/RestDialogBox';
+import { callAPI } from "../api";
+import { restAction, restActionValue } from '../actions/rest/restAction';
+import { logout, authUser } from '../actions/auth/authAction';
+import { AUTH, API_CONTS, storeData, getData, removeData } from '../actions/auth/constants';
 /**
  * 
  * @returns componets
@@ -24,77 +31,66 @@ function ScheduleOrder(props) {
     /**
      * function expression and dynamic stats
      */
-    //var arr = []
     var arr2 = []
+    const monthNames = [
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+    ];
     const minDate = new Date();
+    const month = monthNames[minDate.getMonth()];
+    const day = String(minDate.getDate()).padStart(2, '0');
+    const year = minDate.getFullYear();
+    const output = year + '-' + month + '-' + day;
     const [isToggle, setToggle] = useState(false)
     const [isSelectedEndDate, setSelectedEndDate] = useState(null)
     const [isSelectedStartDate, setSelectedStartDate] = useState(null)
     const [isArray, setArray] = useState([])
     const [Array, setarray] = useState([...props.route.params.list])
-    //const [price, setPrice] = useState("")
+    const [isPrice, setPrice] = useState(props.route.params.totalPrice)
+    const [isFullName, setFullName] = useState(props.auth.user.signup_firstname)
+    const [isAddress, setAddress] = useState(props.auth.user.signup_address)
+    const [isDetergent, setDetergent] = useState((props.route.params.detergent === true) ? 1 : 0)
+    const [isPickUp, setPickUp] = useState("")
+    const [isPick, setPick] = useState(output)
 
     useEffect(() => {
         if (props.route.params.list != 'undefined') {
-            // Array.forEach(item => {
-            //     extract(item.pricing_amount, item.pricing_id)
-            // })
             extract()
-            //  setPrice(props.route.params.list.pricing_amount)
         }
+        console.log(isSelectedStartDate)
 
     }, [])
 
     const extract = (id, price) => {
         for (var i = 0; i < Array.length; i++) {
             let arr = []
-            arr['id'] = Array[i].pricing_amount
+            arr['id'] = Array[i].pricing_id
             arr['qty'] = Array[i].quantity
-            arr['price'] = Array[i].pricing_id
-            let a = arr
-            
-            
-            arr2.push(a)
+            arr['price'] = Array[i].pricing_amount
+            arr2.push(arr)
             setArray(arr2)
-           // console.log(arr2)
-            //break;
-            // for(var j = 0; j < Array.length; j++){
-            //     arr2.push([arr])
-            //     console.log(arr2)
-            // }
-          //  arr2.push([...arr2,arr])
         }
-        // props.route.params.list.forEach(item => {
-        //     // arr['id'] = id
-        //     // arr['price'] = price
-        //     console.log(item)
-        // })
-
-        // }
-        // console.log(price)
-
-        //  arr['id'] = price
-        // arr.push([price])
-
-        // arr2.push([arr['id'] = id, arr['price'] = price])
-        // setArray(arr)
-
-    }
-
-
-    const uper = () => {
-        console.log("1",isArray)
     }
 
     const onDateChange = (date, type) => {
-
         if (type === 'END_DATE') {
             setSelectedEndDate(date)
         } else {
-            setSelectedStartDate(date)
+            setSelectedStartDate(date.toISOString().split('T')[0])
             setSelectedEndDate(null)
         }
-        console.log("!", isSelectedEndDate)
+        console.log(isSelectedStartDate)
+        //console.log(Math.floor(new Date("2023.08.10 16:00:00").getTime() / 1000))
     }
 
     const customDayHeaderStylesCallback = ({ dayOfWeek, month, year, }) => {
@@ -106,16 +102,57 @@ function ScheduleOrder(props) {
         };
     }
 
+    const updateUser = async () => {
+        try {
+            if (isPickUp != '') {
+                let data = new FormData();
+                const restInit = {
+                    IS_LOADING: true,
+                    RETURN: false,
+                    IS_RETURN: false,
+                    RETURN_MESSAGE: "Something wrong",
+                }
+                props.restAction(restInit);
+                var keys;
+                for (var i = 0; i < isArray.length; i++) {
+                    keys = [];
+                    for (var k in isArray[i]) {
+                        keys.push(k);
+                    }
+                    for (var k = 0; k < keys.length; k++) {
+                        data.append(`bag_data[${i}][${keys[k]}]`, isArray[i][keys[k]])
+                    }
+                }
+                data.append("fullname", isFullName)
+                data.append("address", isAddress)
+                data.append("is_detergent", isDetergent)
+                data.append("total", isPrice)
+                data.append("pickup", isPickUp)
+                console.log(data)
+                const postsData = callAPI(API_CONTS.SAVEDELIVERY, "POST", data).then(res => {
+                    console.log(res)
+                    if (res.success === true) {
+                        props.navigation.navigate('PickUp', {time: isPickUp})
+                    }
+                });
+            } else {
+                Alert.alert("Please select pickup options given below")
+            }
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+
 
 
     return (
         <View style={styles.container}>
             <View style={{
                 flex: 1,
-                paddingTop: 50
+                alignItems: "center",
+                justifyContent: "center",
             }}>
                 <CalendarPicker
-                    height={hp("60%")}
                     width={wp("90%")}
                     dayLabelsWrapper={{
                         backgroundColor: "white",
@@ -127,69 +164,124 @@ function ScheduleOrder(props) {
                     }}
                     monthTitleStyle={{
                         fontWeight: 'bold',
-                        color: "black"
+                        color: "black",
+                        fontSize: 18
                     }}
                     yearTitleStyle={{
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        color: "black",
+                        fontSize: 18
                     }}
                     startFromMonday={true}
-                    allowRangeSelection={true}
+                    allowRangeSelection={false}
                     minDate={minDate}
-                    todayBackgroundColor="#05C3DD"
-                    dayShape="square"
+                    todayBackgroundColor="gray"
+                    restrictMonthNavigation={true}
+                    dayShape='circle'
                     selectedDayColor="#05C3DD"
                     selectedDayTextColor="#FFFFFF"
                     onDateChange={onDateChange}
-                    previousTitle={""}
+                    previousTitle={"Prev"}
                     // previousComponent={<PreviousArrow />}
                     // nextComponent={<NextArrow />}
                     customDayHeaderStyles={customDayHeaderStylesCallback}
                 />
             </View>
             <View style={{
-                flex: 1,
                 backgroundColor: "white",
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
-                    height: 32,
+                    height: 12,
                 },
-                shadowOpacity: 1,
+                shadowOpacity: 0.58,
                 shadowRadius: 16.00,
-                elevation: 30,
+                elevation: 24,
                 borderTopLeftRadius: 30,
                 borderTopRightRadius: 30,
-                zIndex: 999
             }}>
                 <View>
-                    <View style={styles.TimeViewStyle}>
+                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 12PM - 03PM`) : setPickUp(`${isPick} 12PM - 03PM`) }}
+                        style={styles.TimeViewStyle}>
                         <View>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 22</Text>
-                            <Text style={{ color: 'white' }}>Today</Text>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                }}
+                                format="MMMM DD">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    color: 'white'
+                                }}
+                                format="dddd">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
+                        <Text style={styles.TimeTextStyle}>12 Pm - 3 Pm</Text>
 
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={styles.TimeViewStyle}>
+                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 03PM - 06PM`) : setPickUp(`${isPick} 03PM - 06PM`) }}
+                        style={styles.TimeViewStyle}>
                         <View>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 23</Text>
-                            <Text style={{ color: 'white' }}>Tomorrow</Text>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                }}
+                                format="MMMM DD">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    color: 'white'
+                                }}
+                                format="dddd">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
-                    </View>
+                        <Text style={styles.TimeTextStyle}>3 Pm - 6 Pm</Text>
 
-                    <View style={styles.TimeViewStyle}>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 06PM - 09PM`) : setPickUp(`${isPick} 06PM - 09PM`) }}
+                        style={styles.TimeViewStyle}>
                         <View>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>October 24</Text>
-                            <Text style={{ color: 'white' }}>Sunday</Text>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                }}
+                                format="MMMM DD">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
+                            <Moment
+                                date={isSelectedStartDate ?? minDate}
+                                element={Text}
+                                style={{
+                                    color: 'white'
+                                }}
+                                format="dddd">
+                                {isSelectedStartDate ?? minDate}
+                            </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>4Pm - 7Pm</Text>
-                    </View>
+                        <Text style={styles.TimeTextStyle}>6 Pm - 9 Pm</Text>
+
+                    </TouchableOpacity>
                 </View>
 
                 <View style={{ height: 120, alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => { /* props.navigation.navigate('PickUp')*/ uper() }}>
+                    <TouchableOpacity onPress={() => { /* props.navigation.navigate('PickUp')*/ updateUser() }}>
                         <View style={{ width: wp('90%'), height: 60, backgroundColor: '#189BCF', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Continue</Text>
                         </View>
@@ -200,7 +292,21 @@ function ScheduleOrder(props) {
         </View>
     )
 };
-export default ScheduleOrder;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    rest: state.rest,
+});
+
+const mapDispatchToProps = dispatch => ({
+    authUser: payload => dispatch(authUser(payload)),
+    restAction: payload => dispatch(restAction(payload)),
+    logout: () => dispatch(logout())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ScheduleOrder)
 /**
  * style sheet
  */

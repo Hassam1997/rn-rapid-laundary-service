@@ -46,7 +46,8 @@ const API_CONTS = {
     SAVEORDER: "order/save",
     CHARGE: "charge",
     USERHISTORY: "user/order/listing/0",
-    PRICELISTING: "price/listing"
+    PRICELISTING: "price/listing",
+    SAVEDELIVERY: "order/save"
 }
 
 const AUTH = {
