@@ -1,57 +1,36 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { connect } from 'react-redux';
+import { logout, authUser } from '../actions/auth/authAction';
 
-
-const RemoveData = async () => {
-
-
-    await AsyncStorage.removeItem('Token')
-
-
-}
-
-const Account = ({ navigation }) => {
+function Account(props) {
 
     const [place, setPlace] = useState('')
     const [contact, setContact] = useState('')
     const [email, setEmail] = useState('')
 
     const locationadd = async () => {
-
-
-        const address = await AsyncStorage.getItem('@address')
-        const contact = await AsyncStorage.getItem('@phone')
-        const email = await AsyncStorage.getItem('@email')
-
-        setPlace(address)
-        setContact(contact)
-        setEmail(email)
-
-        // console.log('hsadjasjda')
+        props.logout()
     }
 
-    useEffect(()=>{
-        locationadd()
-    })
-
-
-
     return (
-
-        <ScrollView style={{ flex: 1 }}>
-            <View style={{ height: 80, justifyContent: 'flex-end', alignItems: 'center' }}>
-                <View style={{ width: wp('90%'), height: 50, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ flex: 1 }}>
+            <View style={{ height: 60, justifyContent: 'flex-end', alignItems: 'center' }}>
+                <View style={{ width: wp('90%'), height: 40, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: wp('30%'), alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Account</Text>
                     </View>
 
                     <View style={{ width: wp('30%'), alignItems: 'flex-end', justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => { navigation.navigate('Edit') }}>
-                            <View style={{ width: 40, height: 40, backgroundColor: '#189BCF', borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <Image source={require('../assets/edit.png')} />
+                        <TouchableOpacity onPress={() => { props.navigation.navigate('Edit') }}>
+                            <View style={{ width: 45, height: 45, backgroundColor: '#189BCF', borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image source={require('../assets/edit.png')}
+                                    style={{ alignSelf: "center" }} />
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -65,15 +44,15 @@ const Account = ({ navigation }) => {
             </View>
 
             <View style={{ height: 30, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20 }}>{email}</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'Poppins-Regular' }}>{props.auth.user.signup_email}</Text>
             </View>
 
             <View style={{ height: 30, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20 }}>(415) {contact}</Text>
+                <Text style={{ fontSize: 20 }}>{props.auth.user.signup_phone}</Text>
             </View>
 
-            <View style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ height: 60, backgroundColor: '#189BCF', width: wp('80%'), borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ height: 80, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 60, backgroundColor: '#189BCF', width: wp('90%'), borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ color: 'white' }}>Account Credits : $0.00</Text>
                 </View>
             </View>
@@ -85,7 +64,7 @@ const Account = ({ navigation }) => {
                             <Image source={require('../assets/location.png')} />
                         </View>
                     </TouchableOpacity>
-                    <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>{place}</Text>
+                    <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: '#189BCF', paddingHorizontal: 10 }}>{props.auth.user.signup_address}</Text>
                 </View>
 
                 <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
@@ -109,7 +88,7 @@ const Account = ({ navigation }) => {
                     <Text style={{ color: '#189BCF', paddingHorizontal: 10 }}>Free Laundry</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => RemoveData()}>
+                <TouchableOpacity onPress={() => locationadd()}>
                     <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
                         <View>
                             <Image source={require('../assets/logout.png')} />
@@ -126,5 +105,18 @@ const Account = ({ navigation }) => {
 
     )
 }
+const mapStateToProps = state => ({
+    auth: state.auth,
+    rest: state.rest,
+});
 
-export default Account
+const mapDispatchToProps = dispatch => ({
+    authUser: payload => dispatch(authUser(payload)),
+    restAction: payload => dispatch(restAction(payload)),
+    logout: () => dispatch(logout())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Account);

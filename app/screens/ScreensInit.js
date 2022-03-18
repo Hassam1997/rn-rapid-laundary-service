@@ -29,7 +29,6 @@ import ScheduleOrder from './ScheduleOrder';
 import SubmitRequest from './SubmitRequest'
 import MyCases from './MyCases'
 import Profile from './Profile';
-import EditProfile from './EditProfile'
 import PickUpConfirm from './PickUpConfirm';
 import WashAndFold from './WashAndFold';
 import Account from './Account';
@@ -39,7 +38,8 @@ import Order from './Order';
 import Plans from './Plans';
 import Notification from './Notification';
 import Map from './Map';
-import editScreen from './editScreen';
+import EditProfile from './EditProfile';
+import Help from './Help';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
@@ -190,16 +190,7 @@ const StackHome = ({ navigation, props, back, route }) => {
           headerTitle: "Pickup",
           headerTitleAlign: 'center',
           headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            marginTop: 15,
-            left: 15,
-
-          },
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: color.palette.white,
             elevation: 0,
@@ -212,29 +203,6 @@ const StackHome = ({ navigation, props, back, route }) => {
         options={{
           headerMode: 'float',
           headerTitle: "Unlock Unlimited",
-          headerTitleAlign: 'center',
-          headerShown: true,
-          headerLeft: () =>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-              <Back />
-            </TouchableOpacity>,
-
-          headerLeftContainerStyle: {
-            marginTop: 15,
-            left: 15,
-
-          },
-          headerStyle: {
-            backgroundColor: color.palette.white,
-            elevation: 0,
-            shadowColor: 'transparent'
-          },
-        }}
-      />
-      <Tab.Screen name="Edit" component={editScreen}
-        options={{
-          headerMode: 'float',
-          headerTitle: "",
           headerTitleAlign: 'center',
           headerShown: true,
           headerLeft: () =>
@@ -312,41 +280,34 @@ const StackHome = ({ navigation, props, back, route }) => {
 
 const StackProfile = ({ navigation, props, route }) => {
   return (
-    <ProfileStack.Navigator
-      initialRouteName='Profile'>
-      <Tab.Screen name="Profile" component={Profile}
+    <HomeStack.Navigator
+      initialRouteName='Account'>
+      <Stack.Screen name="Account" component={Account}
         options={{
           headerShown: false,
         }}
       />
-
-      <Tab.Screen name="EditProfile" component={EditProfile}
+      <Stack.Screen name="Edit" component={EditProfile}
         options={{
-          headerMode: 'float',
           headerTitle: "",
-          headerShown: false,
-          headerBackTitleVisible: true,
-          headerBackTitle: "Back",
-          headerTintColor: "black",
-          headerBackTitleStyle: {
-            fontSize: 16,
-            fontFamily: "Poppins-Medium",
-            color: "black",
-          },
+          headerTitleAlign: 'center',
+          headerShown: true,
+          headerLeft: () =>
+            <TouchableOpacity onPress={() => { navigation.navigate("Account") }}>
+              <Back />
+            </TouchableOpacity>,
           headerLeftContainerStyle: {
-            marginTop: 10,
-            left: (Platform.OS === 'ios') ? 18 : 8,
-            alignItems: "center"
+            marginTop: 15,
+            left: 15,
           },
           headerStyle: {
-            backgroundColor: '#ECF5FD',
-            height: styles.height,
+            backgroundColor: color.palette.white,
             elevation: 0,
             shadowColor: 'transparent'
           },
         }}
       />
-    </ProfileStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
@@ -380,7 +341,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="Account" component={Account}
+      <Tab.Screen name="AccountNew" component={StackProfile}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -416,7 +377,7 @@ function MyTabs({ props, navigation, route }) {
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
         }} />
-      <Tab.Screen name="Promotion" component={Promotion}
+      {/* <Tab.Screen name="Promotion" component={Promotion}
         options={{
           tabBarVisible: false,
           headerShown: false,
@@ -434,8 +395,8 @@ function MyTabs({ props, navigation, route }) {
           tabBarLabel: 'Promotion',
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'white',
-        }} />
-      <Tab.Screen name="Order" component={Order}
+        }} /> */}
+      <Stack.Screen name="Help" component={Help}
         options={{
           headerTitleAlign: 'center',
           headerShown: false,

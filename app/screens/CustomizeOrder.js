@@ -19,6 +19,7 @@ import Button from '../components/Buttons';
 import { connect } from 'react-redux';
 import { getprice } from "../actions/product/productAction";
 import Clothes from '../assets/clothes.svg';
+import Detergent from '../assets/detergent.svg';
 /**
  * function jsx
  */
@@ -140,111 +141,121 @@ function CustomizeOrder(props) {
                                     style={styles.AdrressTextStyle}>Wash & Fold</Text>
                             </View>
                         </TouchableOpacity>
+                        {
+                            isPriceList.length > 0 ?
+                                <FlatList
+                                    data={isPriceList}
+                                    extraData={isFlatList}
+                                    keyExtractor={(item) => item.pricing_id}
+                                    ListFooterComponent={<View style={{ height: 10 }} />}
+                                    renderItem={({ item, index }) => {
+                                        return (
+                                            <View
+                                                key={index}
+                                                style={{
+                                                    paddingVertical: 10,
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'space-evenly',
+                                                    width: wp("88%"),
+                                                    alignSelf: "center"
+                                                }}>
+                                                <Clothes width={34} height={33} />
+                                                <View style={{
+                                                    width: wp("34%"),
+                                                }}>
+                                                    <Text
+                                                        style={{
+                                                            color: '#000000',
+                                                            fontFamily: 'Poppins-Medium',
+                                                            fontSize: 17,
+                                                        }}>
+                                                        {item.pricing_title}
+                                                    </Text>
+                                                    <Text
+                                                        style={{
+                                                            bottom: 5,
+                                                            color: '#707070',
+                                                            fontFamily: 'Poppins-Regular',
+                                                            fontSize: 16,
+                                                        }}>
+                                                        {item.pricing_amount}$
+                                                    </Text>
+                                                </View>
 
-                        <FlatList
-                            data={isPriceList}
-                            extraData={isFlatList}
-                            keyExtractor={(item) => item.pricing_id}
-                            ListFooterComponent={<View style={{ height: 10 }} />}
-                            renderItem={({ item, index }) => {
-                                return (
-                                    <View
-                                        key={index}
-                                        style={{
-                                            paddingVertical: 10,
-                                            flexDirection: 'row',
-                                            justifyContent: 'space-evenly',
-                                            width: wp("88%"),
-                                            alignSelf: "center"
-                                        }}>
-                                        <Clothes width={34} height={33} />
-                                        <View style={{
-                                            width: wp("34%"),
-                                        }}>
-                                            <Text
-                                                style={{
-                                                    color: '#000000',
-                                                    fontFamily: 'Poppins-Medium',
-                                                    fontSize: 17,
-                                                }}>
-                                                {item.pricing_title}
-                                            </Text>
-                                            <Text
-                                                style={{
-                                                    bottom: 5,
-                                                    color: '#707070',
-                                                    fontFamily: 'Poppins-Regular',
-                                                    fontSize: 16,
-                                                }}>
-                                                {item.pricing_amount}$
-                                            </Text>
-                                        </View>
-
-                                        <View
-                                            style={{
-                                                flexDirection: 'row',
-                                            }}>
-                                            <TouchableOpacity
-                                                onPress={() => {
-                                                    Quantity(item.pricing_id, "decrement")
-                                                }}
-                                                style={{
-                                                    width: 35,
-                                                    height: 35,
-                                                    borderRadius: 5,
-                                                    backgroundColor: '#BBECFF',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
-                                                <Text
+                                                <View
                                                     style={{
-                                                        color: '#189BCF',
-                                                        fontSize: 25,
+                                                        flexDirection: 'row',
                                                     }}>
-                                                    -
-                                                </Text>
-                                            </TouchableOpacity>
+                                                    <TouchableOpacity
+                                                        onPress={() => {
+                                                            Quantity(item.pricing_id, "decrement")
+                                                        }}
+                                                        style={{
+                                                            width: 35,
+                                                            height: 35,
+                                                            borderRadius: 5,
+                                                            backgroundColor: '#BBECFF',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                        }}>
+                                                        <Text
+                                                            style={{
+                                                                color: '#189BCF',
+                                                                fontSize: 25,
+                                                            }}>
+                                                            -
+                                                        </Text>
+                                                    </TouchableOpacity>
 
-                                            <Text
-                                                style={{
-                                                    marginHorizontal: 5,
-                                                    borderRadius: 5,
-                                                    textAlign: 'center',
-                                                    width: 35,
-                                                    height: 35,
-                                                    backgroundColor: '#BBECFF',
-                                                    color: 'black',
-                                                    fontSize: 20,
-                                                    textAlignVertical: 'center',
-                                                }}>
-                                                {item.quantity}
-                                            </Text>
+                                                    <Text
+                                                        style={{
+                                                            marginHorizontal: 5,
+                                                            borderRadius: 5,
+                                                            textAlign: 'center',
+                                                            width: 35,
+                                                            height: 35,
+                                                            backgroundColor: '#BBECFF',
+                                                            color: 'black',
+                                                            fontSize: 20,
+                                                            textAlignVertical: 'center',
+                                                        }}>
+                                                        {item.quantity}
+                                                    </Text>
 
-                                            <TouchableOpacity
-                                                onPress={() => {
-                                                    Quantity(item.pricing_id, "increment")
-                                                }}
-                                                style={{
-                                                    width: 35,
-                                                    height: 35,
-                                                    borderRadius: 5,
-                                                    backgroundColor: '#BBECFF',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
-                                                <Text
-                                                    style={{
-                                                        color: '#189BCF',
-                                                        fontSize: 25,
-                                                    }}>
-                                                    +
-                                                </Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                )
-                            }}
-                        />
+                                                    <TouchableOpacity
+                                                        onPress={() => {
+                                                            Quantity(item.pricing_id, "increment")
+                                                        }}
+                                                        style={{
+                                                            width: 35,
+                                                            height: 35,
+                                                            borderRadius: 5,
+                                                            backgroundColor: '#BBECFF',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                        }}>
+                                                        <Text
+                                                            style={{
+                                                                color: '#189BCF',
+                                                                fontSize: 25,
+                                                            }}>
+                                                            +
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
+                                        )
+                                    }}
+                                />
+                                :
+                                <Text style={{
+                                    textAlign: 'center',
+                                    height: 200,
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>Refresh list by tapping the check box again !!</Text>
+                        }
+
                         <View
                             style={{
                                 width: wp('88%'),
@@ -294,13 +305,10 @@ function CustomizeOrder(props) {
                                     paddingVertical: 18,
                                     flexDirection: 'row',
                                     justifyContent: 'space-evenly',
+                                    alignItems: "center"
                                 }}>
-                                {/* <Image source={require('../assets/bottle.png')}
-                                        style={{
-                                            left: 3
-                                        }}
-                                    /> */}
-
+                                <Image source={require('../assets/detergent.png')}
+                                    resizeMode='contain' />
                                 <View style={{}}>
                                     <Text
                                         style={{

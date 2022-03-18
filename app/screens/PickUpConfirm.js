@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
@@ -7,11 +7,11 @@ const PickUpConfirm = (props) => {
 
     const [Time, setTime] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
 
         setTime(props.route.params.time)
-    },[])
- 
+    }, [])
+
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
 
@@ -23,7 +23,7 @@ const PickUpConfirm = (props) => {
 
             <View style={{ flex: 0.16, alignItems: 'center', justifyContent: 'center', }}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>PickUp Confirm</Text>
-                <Text style={{ fontSize: 18,  color:'black' }}>{Time}</Text>
+                <Text style={{ fontSize: 18, color: 'black' }}>{Time}</Text>
             </View>
 
             <View style={{ flex: 0.07, alignItems: 'center', justifyContent: 'center', }}>
@@ -31,14 +31,19 @@ const PickUpConfirm = (props) => {
             </View>
 
             <View style={{ flex: 0.2, height: 60, alignItems: 'center', justifyContent: 'center', }}>
-                <TouchableOpacity onPress={() => { props.navigation.navigate('Explore') }}>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'Explore' }],
+                    });
+                }}>
                     <View style={{ width: wp('90%'), height: 60, backgroundColor: '#189BCF', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontSize: 20 }}>Continue</Text>
                     </View>
                 </TouchableOpacity>
             </View>
 
-        
+
         </View>
     )
 }

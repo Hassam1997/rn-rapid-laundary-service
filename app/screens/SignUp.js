@@ -21,7 +21,7 @@ import { storeData } from '../actions/auth/constants';
 /**
  * function jsx
  */
-function SignUp({ props, navigation }) {
+function SignUp(props) {
 
     const [FirstName, setFirstName] = useState('');
     const [LastName, setLastName] = useState('');

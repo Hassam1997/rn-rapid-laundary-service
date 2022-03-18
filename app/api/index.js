@@ -37,7 +37,7 @@ export const callAPI = async (endpoint, method = 'get', formData, header = { Acc
          return json;
       })
       .catch((error) => {
-         console.error(error);
+         console.log(error);
       });
 };
 

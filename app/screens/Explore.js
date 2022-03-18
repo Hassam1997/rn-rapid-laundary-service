@@ -63,7 +63,7 @@ function Explore(props) {
                     <Text onPress={() => { props.navigation.navigate("CustomizeOrder") }}
                         numberOfLines={1}
                         ellipsizeMode='tail'
-                        style={styles.TimeTextStyle}>Explore Other Times</Text>
+                        style={styles.TimeTextStyle}>Place your order now</Text>
                 </View>
                 <Text style={styles.TextStyle}>When Will My Order Be Ready</Text>
             </View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "flex-start",
-        paddingHorizontal: 15,
+        padding: 8,
         backgroundColor: color.primaryLighter,
         borderRadius: 10
     },

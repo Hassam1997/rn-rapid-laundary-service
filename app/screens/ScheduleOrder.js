@@ -51,7 +51,7 @@ function ScheduleOrder(props) {
     const day = String(minDate.getDate()).padStart(2, '0');
     const year = minDate.getFullYear();
     const output = year + '-' + month + '-' + day;
-    const [isToggle, setToggle] = useState(false)
+    const [selectedBtn, setSelectedBtn] = useState(null);
     const [isSelectedEndDate, setSelectedEndDate] = useState(null)
     const [isSelectedStartDate, setSelectedStartDate] = useState(null)
     const [isArray, setArray] = useState([])
@@ -106,13 +106,13 @@ function ScheduleOrder(props) {
         try {
             if (isPickUp != '') {
                 let data = new FormData();
-                const restInit = {
-                    IS_LOADING: true,
-                    RETURN: false,
-                    IS_RETURN: false,
-                    RETURN_MESSAGE: "Something wrong",
-                }
-                props.restAction(restInit);
+                // const restInit = {
+                //     IS_LOADING: true,
+                //     RETURN: false,
+                //     IS_RETURN: false,
+                //     RETURN_MESSAGE: "Something wrong",
+                // }
+                // props.restAction(restInit);
                 var keys;
                 for (var i = 0; i < isArray.length; i++) {
                     keys = [];
@@ -132,7 +132,15 @@ function ScheduleOrder(props) {
                 const postsData = callAPI(API_CONTS.SAVEDELIVERY, "POST", data).then(res => {
                     console.log(res)
                     if (res.success === true) {
-                        props.navigation.navigate('PickUp', {time: isPickUp})
+                        props.navigation.navigate('PickUp', { time: isPickUp })
+                    } else {
+                        const restInit = {
+                            IS_LOADING: false,
+                            RETURN: false,
+                            IS_RETURN: true,
+                            RETURN_MESSAGE: "Please Select Laundry Bags!!",
+                        }
+                        props.restAction(restInit);
                     }
                 });
             } else {
@@ -201,14 +209,17 @@ function ScheduleOrder(props) {
                 borderTopRightRadius: 30,
             }}>
                 <View>
-                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 12PM - 03PM`) : setPickUp(`${isPick} 12PM - 03PM`) }}
-                        style={styles.TimeViewStyle}>
+                    <TouchableOpacity onPress={() => {
+                        isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 12PM - 03PM`) : setPickUp(`${isPick} 12PM - 03PM`),
+                            setSelectedBtn("time1")
+                    }}
+                        style={[styles.TimeViewStyle, { backgroundColor: selectedBtn === 'time1' ? color.primary : color.primaryLighter }]}>
                         <View>
                             <Moment
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                    fontSize: 18, fontWeight: 'bold', color: selectedBtn === 'time1' ? "white" : 'black'
                                 }}
                                 format="MMMM DD">
                                 {isSelectedStartDate ?? minDate}
@@ -217,24 +228,27 @@ function ScheduleOrder(props) {
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    color: 'white'
+                                    color: selectedBtn === 'time1' ? "white" : 'black'
                                 }}
                                 format="dddd">
                                 {isSelectedStartDate ?? minDate}
                             </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>12 Pm - 3 Pm</Text>
+                        <Text style={[styles.TimeTextStyle, { color: selectedBtn === 'time1' ? "white" : 'black' }]}>12 Pm - 3 Pm</Text>
 
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 03PM - 06PM`) : setPickUp(`${isPick} 03PM - 06PM`) }}
-                        style={styles.TimeViewStyle}>
+                    <TouchableOpacity onPress={() => {
+                        isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 03PM - 06PM`) : setPickUp(`${isPick} 03PM - 06PM`),
+                            setSelectedBtn("time2")
+                    }}
+                        style={[styles.TimeViewStyle, { backgroundColor: selectedBtn === 'time2' ? color.primary : color.primaryLighter }]}>
                         <View>
                             <Moment
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                    fontSize: 18, fontWeight: 'bold', color: selectedBtn === 'time2' ? "white" : 'black'
                                 }}
                                 format="MMMM DD">
                                 {isSelectedStartDate ?? minDate}
@@ -243,24 +257,26 @@ function ScheduleOrder(props) {
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    color: 'white'
+                                    color: selectedBtn === 'time2' ? "white" : 'black'
                                 }}
                                 format="dddd">
                                 {isSelectedStartDate ?? minDate}
                             </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>3 Pm - 6 Pm</Text>
-
+                        <Text style={[styles.TimeTextStyle, { color: selectedBtn === 'time2' ? "white" : 'black' }]}>3 Pm - 6 Pm</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => { isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 06PM - 09PM`) : setPickUp(`${isPick} 06PM - 09PM`) }}
-                        style={styles.TimeViewStyle}>
+                    <TouchableOpacity onPress={() => {
+                        isSelectedStartDate != null ? setPickUp(`${isSelectedStartDate} 06PM - 09PM`) : setPickUp(`${isPick} 06PM - 09PM`),
+                            setSelectedBtn("time3")
+                    }}
+                        style={[styles.TimeViewStyle, { backgroundColor: selectedBtn === 'time3' ? color.primary : color.primaryLighter }]}>
                         <View>
                             <Moment
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    fontSize: 18, fontWeight: 'bold', color: 'white'
+                                    fontSize: 18, fontWeight: 'bold', color: selectedBtn === 'time3' ? "white" : 'black'
                                 }}
                                 format="MMMM DD">
                                 {isSelectedStartDate ?? minDate}
@@ -269,13 +285,13 @@ function ScheduleOrder(props) {
                                 date={isSelectedStartDate ?? minDate}
                                 element={Text}
                                 style={{
-                                    color: 'white'
+                                    color: selectedBtn === 'time3' ? "white" : 'black'
                                 }}
                                 format="dddd">
                                 {isSelectedStartDate ?? minDate}
                             </Moment>
                         </View>
-                        <Text style={styles.TimeTextStyle}>6 Pm - 9 Pm</Text>
+                        <Text style={[styles.TimeTextStyle, { color: selectedBtn === 'time3' ? "white" : 'black' }]}>6 Pm - 9 Pm</Text>
 
                     </TouchableOpacity>
                 </View>
@@ -287,7 +303,7 @@ function ScheduleOrder(props) {
                         </View>
                     </TouchableOpacity>
                 </View>
-
+                <RestDialogBox />
             </View>
         </View>
     )
@@ -358,12 +374,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignSelf: "center",
         paddingHorizontal: 20,
-        backgroundColor: color.primary,
         borderRadius: 10
     },
     TimeTextStyle: {
         fontSize: 15,
-        color: "white",
         fontFamily: "Poppins-Regular",
         textAlign: "center"
     },
