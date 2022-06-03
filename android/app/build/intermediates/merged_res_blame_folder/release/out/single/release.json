@@ -1,0 +1,194 @@
+[
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_loginbackground.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_loginbackground.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xhdpi_splash.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xhdpi\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_shirt.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_shirt.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_icon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_person.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_person.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_location.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_location.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_bages.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_bages.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_detergent.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_detergent.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-hdpi_node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-hdpi\\node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xxhdpi\\node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable_background_splash.xml.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\drawable\\background_splash.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi_splash.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_credit.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_credit.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-hdpi\\node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_cloth.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_cloth.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_front.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_front.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_logout.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_logout.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi_node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xhdpi\\node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_checksm.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_checksm.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi_splash.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\layout_launch_screen.xml.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\layout\\launch_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_couple.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_couple.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xxxhdpi\\node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xhdpi\\node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_edit.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_edit.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-hdpi_splash.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-hdpi\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi_node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xxxhdpi\\node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi_splash.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-mdpi\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_locationb.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_locationb.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi_node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xxhdpi\\node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_setting.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_setting.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi_node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xhdpi\\node_modules_reactnativegoogleplacesautocomplete_images_powered_by_google_on_white.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi_node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-xxhdpi\\node_modules_reactnavigation_drawer_src_views_assets_toggledrawericon.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi_app_assets_check.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\generated\\res\\react\\release\\drawable-mdpi\\app_assets_check.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\pc\\Desktop\\hs\\rn-rapid-laundary-service\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    }
+]

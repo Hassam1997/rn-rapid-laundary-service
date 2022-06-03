@@ -1,0 +1,11 @@
+com/rapid_laundary_service/MainActivity.java
+ com.rapid_laundary_service.MainActivity
+com/rapid_laundary_service/MainApplication.java
+ com.rapid_laundary_service.MainApplication
+ com.rapid_laundary_service.MainApplication$1
+com/rapid_laundary_service/SplashActivity.java
+ com.rapid_laundary_service.SplashActivity
+com/rapid_laundary_service/BuildConfig.java
+ com.rapid_laundary_service.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

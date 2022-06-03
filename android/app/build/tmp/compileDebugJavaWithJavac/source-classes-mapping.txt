@@ -1,0 +1,16 @@
+com/rapid_laundary_service/MainActivity.java
+ com.rapid_laundary_service.MainActivity
+com/rapid_laundary_service/MainApplication.java
+ com.rapid_laundary_service.MainApplication
+ com.rapid_laundary_service.MainApplication$1
+com/rapid_laundary_service/ReactNativeFlipper.java
+ com.rapid_laundary_service.ReactNativeFlipper
+ com.rapid_laundary_service.ReactNativeFlipper$1
+ com.rapid_laundary_service.ReactNativeFlipper$2
+ com.rapid_laundary_service.ReactNativeFlipper$2$1
+com/rapid_laundary_service/SplashActivity.java
+ com.rapid_laundary_service.SplashActivity
+com/rapid_laundary_service/BuildConfig.java
+ com.rapid_laundary_service.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
