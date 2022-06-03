@@ -15,12 +15,25 @@ function EditProfile(props) {
     const [Newpassword, setNewPassword] = useState('');
     const [address, setAddress] = useState('');
     const [mobile, setMobile] = useState('');
+    const [selection, setSelection] = useState(Platform.OS === 'android' ? { start: 0 } : null)
 
     useEffect(() => {
         setFirstName(props.auth.user.signup_firstname)
         setMobile(props.auth.user.signup_phone)
         setAddress(props.auth.user.signup_address)
     }, [])
+
+    const onFocus = () => {
+        if (Platform.OS === 'android') {
+            setSelection(null);
+        }
+    }
+
+    const onBlur = () => {
+        if (Platform.OS === 'android') {
+            setSelection({ start: 0 });
+        }
+    }
 
     const updateUser = async () => {
         try {
@@ -126,9 +139,10 @@ function EditProfile(props) {
                 <View style={{ height: 60, backgroundColor: '#F1ECEC', width: wp('90%'), borderRadius: 10, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20 }}>
 
                     <TextInput
-                        //selection={{ start: 0, end: 0 }}
-                        style={{ width: wp('80%') }}
-                        placeholder={'Address'}
+                        selection={selection}
+                        onFocus={() => onFocus()}
+                        onBlur={() => onBlur()}
+                        style={{ width: wp('80%'), height: 50 }}
                         onChangeText={(value) => setAddress(value)}
                         value={address}
                     />

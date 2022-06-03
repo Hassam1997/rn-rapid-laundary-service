@@ -74,23 +74,25 @@ export default function Help(props) {
     console.log(currentIndex)
 
     return (
-        <Transitioning.View
-            ref={ref}
-            transition={transition}
+        <ScrollView
+            contentContainerStyle={{
+                flexGrow: 1
+            }}
             style={styles.container}>
-            <View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: 20 }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: 15 }}>
                 <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium', width: wp('60%'), textAlign: 'center' }}>Frequently Asked Questions</Text>
             </View>
             {
                 isState.map((item, index) => {
                     return (
                         <View
-                            key={index} style={{ marginVertical: 10 }}>
-                            <TouchableOpacity onPress={() => {
-                                ref.current.animateNextTransition()
-                                setCurrentIndex(index === currentIndex ? null : index)
-                            }}
-                                style={{ height: 60, width: wp('90%'), backgroundColor: '#189BCF', alignSelf: "center", borderRadius: 10, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', elevation: 20, top: 10 }}>
+                            key={index} style={{ marginVertical: 10, }}>
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => {
+                                    setCurrentIndex(index === currentIndex ? null : index)
+                                }}
+                                style={{ height: 55, width: wp('90%'), backgroundColor: '#189BCF', alignSelf: "center", borderRadius: 10, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', elevation: 20, top: 10 }}>
                                 <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 15, marginLeft: 10 }}>Question Will Be Here</Text>
                                 <Icon name={(index === currentIndex) ? 'down' : 'up'}
                                     style={{ color: 'white', marginRight: 20 }}
@@ -98,7 +100,7 @@ export default function Help(props) {
                             </TouchableOpacity>
                             {
                                 index === currentIndex ? (
-                                    <View style={{ width: wp('90%'), backgroundColor: '#F1ECEC', alignSelf: 'center', borderRadius: 10, paddingTop: 10 }}>
+                                    <View style={{ width: wp('90%'), backgroundColor: '#F1ECEC', alignSelf: 'center', borderRadius: 10, paddingTop: 8 }}>
                                         <Text style={{ fontSize: 14, padding: 10, color: 'black' }}>lorem dsjand sabdjs bajdbhsad sadjasbj dbsa asbdsha abddjsab sd  db sbadsbak dsdsa dasd wadsad sdasdsa dasdasdbsajkbd sbakbdksab jdbsakbdjk bsajbdjk bkbsajdbad bksabdjksabkdbsakb djsab k</Text>
                                     </View>
                                 )
@@ -109,7 +111,7 @@ export default function Help(props) {
                     )
                 })
             }
-        </Transitioning.View>
+        </ScrollView>
     )
 };
 /**
